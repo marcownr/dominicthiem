@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/jpeg" href="assets/media/dt-favicon.jpg" />
+  <link rel="shortcut icon" href="assets/media/dt-favicon.jpg" />
+  <title>Impressum — Dominic Thiem</title>
+  <meta name="description" content="Impressum der DT Sport GmbH." />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #171717;
+      color: #fff;
+      font-family: var(--dt-font-primary);
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; }
+
+    .dt-nav{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+      background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+    }
+
+    .dt-nav.is-scrolled{
+  background: rgba(23,23,23,.96);
+  border-bottom-color: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dt-nav__wrap{
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .dt-nav__logo{ display: inline-flex; align-items: center; }
+    .dt-nav__logo img{
+      width: 86px;
+      height: auto;
+      display: block;
+      border-radius: 0 !important;
+    }
+
+    .dt-nav__menu{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .dt-nav__menu > li{ position: relative; }
+
+    .dt-nav__link,
+    .dt-nav__trigger,
+    .dt-nav__lang{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.92);
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1;
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color .18s ease, opacity .18s ease;
+    }
+
+.dt-nav__lang.is-active{
+  opacity: .45;
+  cursor: default;
+  pointer-events: none;
+  border-bottom-color: transparent !important;
+}
+
+    .dt-nav__lang{ opacity: .9; }
+
+    .dt-nav__link:hover,
+    .dt-nav__trigger:hover,
+    .dt-nav__lang:hover,
+    .dt-nav__link.is-active,
+    .dt-nav__trigger.is-active{
+      border-bottom-color: rgba(255,255,255,.92);
+    }
+
+    .dt-nav__arrow{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 7px;
+  border-right: 2px solid rgba(255,255,255,.96);
+  border-bottom: 2px solid rgba(255,255,255,.96);
+  transform: translateY(-2px) rotate(45deg);
+  opacity: .98;
+}
+
+    .dt-nav__dropdown{
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      min-width: 272px;
+  width: max-content;
+      padding: 8px 0;
+  background: rgba(23,23,23,.98);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+      display: grid;
+      gap: 4px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(6px);
+      transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+    }
+
+    .dt-nav__item--projects:hover .dt-nav__dropdown,
+    .dt-nav__item--projects:focus-within .dt-nav__dropdown{
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dt-nav__dropdown a{
+  color: rgba(255,255,255,.94);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: block;
+  white-space: nowrap;
+  font-weight: 400;
+  opacity: .92;
+  transition: background .16s ease, opacity .16s ease;
+}
+
+html,body{ color:var(--dt-secondary); text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+html{ -webkit-font-smoothing: antialiased; }
+body{ font-family: var(--dt-font-primary); font-weight:var(--dt-weight-text); }
+p{ font-family: var(--dt-font-primary); font-weight:400; }
+h1,h2,h3,h4,h5,h6{ font-weight:var(--dt-weight-primary); }
+strong,b{ font-weight:var(--dt-weight-accent); }
+.dt-accent,[data-accent="true"]{ color:var(--dt-accent); font-weight:var(--dt-weight-accent); }
+
+/* remove glow effects globally */
+.dt-page::before,
+.dt-projects::before,
+.dt-bioCV::before,
+.dt-partners::before,
+.dt-store::before,
+.dt-autograph::before,
+.dt-umbrella::before{
+  content:none !important;
+  background:none !important;
+}
+
+.dt-page,
+.dt-projects,
+.dt-bioCV,
+.dt-partners,
+.dt-store,
+.dt-autograph,
+.dt-umbrella{
+  background:transparent !important;
+}
+</style>
+
+<link rel="stylesheet" href="assets/css/mobile-nav.css">
+</head>
+<body>
+  <nav class="dt-nav" aria-label="Hauptnavigation">
+    <div class="dt-nav__wrap">
+      <a class="dt-nav__logo" href="index.html" aria-label="Startseite">
+        <img src="assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="eager" decoding="async" />
+      </a>
+
+      <ul class="dt-nav__menu">
+        <li><a class="dt-nav__link" href="about.html">About</a></li>
+
+        <li class="dt-nav__item--projects">
+          <a class="dt-nav__trigger" href="projekte.html">Projekte <span class="dt-nav__arrow" aria-hidden="true"></span></a>
+          <div class="dt-nav__dropdown" aria-label="Projekte Untermenü">
+            <a href="projekte/thiem-energy.html">THIEM ENERGY</a>
+            <a href="projekte/thiem-view.html">THIEM VIEW</a>
+            <a href="projekte/thiem-academy-burgenland.html">THIEM ACADEMY</a>
+          </div>
+        </li>
+
+        <li><a class="dt-nav__link" href="partner.html">Partner</a></li>
+        <li><a class="dt-nav__link" href="investments.html">Investments</a></li>
+        <li><a class="dt-nav__link" href="https://shop.dominicthiem.com/" target="_blank" rel="noopener noreferrer">Shop</a></li>
+        <li><a class="dt-nav__lang is-active" href="#" aria-label="Sprache Deutsch" aria-current="true">DE</a></li>
+        <li><a class="dt-nav__lang" href="/en/imprint/" aria-label="Language English">EN</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="dt-page">
+    <section class="dt-imprint" aria-label="Impressum">
+      <h1 class="dt-imprint__title">Impressum</h1>
+
+      <div class="dt-imprint__section">
+        <p class="dt-imprint__label">Medieninhaber</p>
+        <p class="dt-imprint__text">
+          DT Sport GmbH<br />
+          Angergasse 64<br />
+          2493 Lichtenwörth<br />
+          UID: ATU81770647
+        </p>
+      </div>
+
+      <div class="dt-imprint__section">
+        <p class="dt-imprint__label">Rechtliche Hinweise</p>
+        <p class="dt-imprint__text">© Die Inhalte dieser Website sind urheberrechtlich geschützt und dürfen nicht ohne Zustimmung des Medieninhabers bzw des jeweiligen Rechteinhabers verwendet werden.</p>
+        <p class="dt-imprint__text">Die auf dieser Website bereitgestellten Informationen wurden sorgfältig überprüft und werden regelmäßig aktualisiert. Jedoch kann keine Haftung dafür übernommen werden, dass alle Angaben zu jeder Zeit vollständig, richtig und in letzter Aktualität dargestellt sind. Für fremde Inhalte, also insbesondere für den Inhalt fremder Beiträge und verlinkter Websites kann keinerlei Haftung bzw Verantwortung übernommen werden. Sollten Sie Beiträge Dritter mit möglicherweise rechtswidrigem Inhalt entdecken, wenden Sie sich bitte umgehend den Medieninhaber.</p>
+      </div>
+
+      <div class="dt-imprint__section">
+        <p class="dt-imprint__label">Bildernachweis</p>
+        <p class="dt-imprint__text">Die Bilder, Fotos und Grafiken auf dieser Webseite sind urheberrechtlich geschützt.</p>
+      </div>
+
+      <div class="dt-imprint__section">
+        <p class="dt-imprint__label">Technische Umsetzung</p>
+        <p class="dt-imprint__text">NeueSeite.at</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dt-footer" aria-label="Footer">
+    <div class="dt-footer__wrap">
+      <a class="dt-footer__logo" href="index.html" aria-label="Startseite">
+        <img src="assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="lazy" decoding="async" />
+      </a>
+
+      <nav class="dt-footer__links" aria-label="Footer Navigation">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+
+      <div class="dt-footer__social" aria-label="Social Media">
+        <a href="https://www.facebook.com/1.Dominic.Thiem/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.1h2.7l.4-3.2h-3.1V7.7c0-.9.2-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2v2.4H8v3.2h2.7V21h2.8z"/></svg>
+        </a>
+        <a href="https://x.com/domithiem" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3h2.9l-6.4 7.4L23 21h-6l-4.7-6.2L6.9 21H4l6.9-7.9L1.4 3h6.1l4.2 5.6L18.9 3zm-1 16.3h1.6L6.6 4.6H4.9l13 14.7z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/c/dominicthiem" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.5-.4-5.2c-.2-1-.9-1.7-1.9-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.7.5c-1 .3-1.7 1-1.9 2C1 8.5 1 12 1 12s0 3.5.4 5.2c.2 1 .9 1.7 1.9 2 1.8.5 8.7.5 8.7.5s6.9 0 8.7-.5c1-.3 1.7-1 1.9-2 .4-1.7.4-5.2.4-5.2zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/domithiem/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 2C5.7 4 4 5.7 4 7.8v8.4c0 2.1 1.7 3.8 3.8 3.8h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8c0-2.1-1.7-3.8-3.8-3.8H7.8zm8.9 1.5a1.3 1.3 0 110 2.6 1.3 1.3 0 010-2.6zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/dominic-thiem-03a46a291/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.9-2 3.9-2 4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+<script>
+/* dt-nav-scroll-init */
+(() => {
+  const nav = document.querySelector(".dt-nav");
+  if (!nav) return;
+  const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+})();
+</script>
+
+<script src="assets/js/mobile-nav.js" defer></script>
+</body>
+</html>

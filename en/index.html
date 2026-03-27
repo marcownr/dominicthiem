@@ -1,0 +1,3224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/jpeg" href="../assets/media/dt-favicon.jpg" />
+  <link rel="shortcut icon" href="../assets/media/dt-favicon.jpg" />
+  <title>Dominic Thiem</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #171717;
+      color: #fff;
+      font-family: var(--dt-font-primary);
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; }
+  </style>
+<style>
+.dt-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+}
+
+.dt-nav.is-scrolled{
+  background: rgba(23,23,23,.96);
+  border-bottom-color: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dt-nav__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dt-nav__logo{ display: inline-flex; align-items: center; }
+.dt-nav__logo img{
+  width: 86px;
+  height: auto;
+  display: block;
+  border-radius: 0 !important;
+}
+
+.dt-nav__menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.dt-nav__menu > li{ position: relative; }
+
+.dt-nav__link,
+.dt-nav__trigger,
+.dt-nav__lang{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .18s ease, opacity .18s ease;
+}
+
+.dt-nav__lang.is-active{
+  opacity: .45;
+  cursor: default;
+  pointer-events: none;
+  border-bottom-color: transparent !important;
+}
+
+.dt-nav__lang{ opacity: .9; }
+
+.dt-nav__link:hover,
+.dt-nav__trigger:hover,
+.dt-nav__lang:hover,
+.dt-nav__link.is-active,
+.dt-nav__trigger.is-active{
+  border-bottom-color: rgba(255,255,255,.92);
+}
+
+.dt-nav__arrow{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 7px;
+  border-right: 2px solid rgba(255,255,255,.96);
+  border-bottom: 2px solid rgba(255,255,255,.96);
+  transform: translateY(-2px) rotate(45deg);
+  opacity: .98;
+}
+
+.dt-nav__dropdown{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 272px;
+  width: max-content;
+  padding: 8px 0;
+  background: rgba(23,23,23,.98);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  display: grid;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+}
+
+.dt-nav__item--projects:hover .dt-nav__dropdown,
+.dt-nav__item--projects:focus-within .dt-nav__dropdown{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dt-nav__dropdown a{
+  color: rgba(255,255,255,.94);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: block;
+  white-space: nowrap;
+  font-weight: 400;
+  opacity: .92;
+  transition: background .16s ease, opacity .16s ease;
+}
+
+.dt-nav__dropdown a:hover{
+  opacity: 1;
+  background: rgba(255,255,255,.08);
+}
+
+@media (max-width: 1280px){
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+  
+}
+
+@media (max-width: 960px){
+  .dt-nav__wrap{
+    width: min(1120px, calc(100% - 28px));
+    min-height: 84px;
+    align-items: flex-start;
+    padding-top: 18px;
+    flex-direction: column;
+  }
+
+  .dt-nav__logo img{ width: 72px; }
+
+  .dt-nav__menu{
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+
+  .dt-nav__dropdown{
+    position: static;
+    min-width: 0;
+    padding-top: 2px;
+    transform: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dt-nav__item--projects:hover .dt-nav__dropdown,
+  .dt-nav__item--projects:focus-within .dt-nav__dropdown{
+    display: grid;
+  }
+
+  
+}
+</style>
+
+<style>
+.dt-footer{
+  margin-top: 80px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #171717;
+}
+
+.dt-footer__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 140px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.dt-footer__logo{
+  display: inline-flex;
+  align-items: center;
+}
+
+.dt-footer__logo img{
+  width: 86px !important;
+  max-width: 86px !important;
+  min-width: 86px !important;
+  height: auto !important;
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 0 !important;
+}
+
+.dt-footer__links{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.dt-footer__links a{
+  color: rgba(255,255,255,.88);
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: .01em;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__links a:hover,
+.dt-footer__social a:hover{
+  opacity: .7;
+}
+
+.dt-footer__social{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dt-footer__social a{
+  width: 34px;
+  height: 34px;
+  color: #fff !important;
+  opacity: .92;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__social svg{
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  fill: currentColor !important;
+  opacity: 1;
+}
+
+@media (max-width: 1100px){
+  .dt-footer__wrap{
+    width: min(1120px, calc(100% - 28px));
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 26px 0;
+    gap: 20px;
+  }
+
+  .dt-footer__links{
+    gap: 28px;
+  }
+
+  .dt-footer__links a{
+    font-size: 16px;
+}
+}
+</style>
+
+<style id="dt-brand-theme">
+:root{
+  --dt-primary:#00f3ff;
+  --dt-secondary:#ffffff;
+  --dt-accent:#00f3ff;
+  --dt-font-primary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-font-secondary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-weight-primary:400;
+  --dt-weight-secondary:400;
+  --dt-weight-text:400;
+  --dt-weight-accent:500;
+}
+html,body{ color:var(--dt-secondary); text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+html{ -webkit-font-smoothing: antialiased; }
+body{ font-family: var(--dt-font-primary); font-weight:var(--dt-weight-text); }
+p{ font-family: var(--dt-font-primary); font-weight:400; }
+h1,h2,h3,h4,h5,h6{ font-weight:var(--dt-weight-primary); }
+strong,b{ font-weight:var(--dt-weight-accent); }
+.dt-accent,[data-accent="true"]{ color:var(--dt-accent); font-weight:var(--dt-weight-accent); }
+
+/* remove glow effects globally */
+.dt-page::before,
+.dt-projects::before,
+.dt-bioCV::before,
+.dt-partners::before,
+.dt-store::before,
+.dt-autograph::before,
+.dt-umbrella::before{
+  content:none !important;
+  background:none !important;
+}
+
+.dt-page,
+.dt-projects,
+.dt-bioCV,
+.dt-partners,
+.dt-store,
+.dt-autograph,
+.dt-umbrella{
+  background:transparent !important;
+}
+</style>
+
+<link rel="stylesheet" href="../assets/css/mobile-nav.css">
+</head>
+<body>
+
+<nav class="dt-nav" aria-label="Main navigation">
+  <div class="dt-nav__wrap">
+    <a class="dt-nav__logo" href="/en/" aria-label="Home">
+      <img src="../assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="eager" decoding="async" />
+    </a>
+
+    <ul class="dt-nav__menu">
+      <li><a class="dt-nav__link" href="/en/about/">About</a></li>
+
+      <li class="dt-nav__item--projects">
+        <a class="dt-nav__trigger" href="/en/projekte/">Projects <span class="dt-nav__arrow" aria-hidden="true"></span></a>
+        <div class="dt-nav__dropdown" aria-label="Projects submenu">
+          <a href="projekte/thiem-energy.html">THIEM ENERGY</a>
+          <a href="projekte/thiem-view.html">THIEM VIEW</a>
+          <a href="projekte/thiem-academy-burgenland.html">THIEM ACADEMY</a>
+        </div>
+      </li>
+
+      <li><a class="dt-nav__link" href="/en/partner/">Partner</a></li>
+      <li><a class="dt-nav__link" href="/en/investments/">Investments</a></li>
+      <li><a class="dt-nav__link" href="https://shop.dominicthiem.com/" target="_blank" rel="noopener noreferrer">Shop</a></li>
+      <li><a class="dt-nav__lang" href="/" aria-label="Language German">DE</a></li>
+      <li><a class="dt-nav__lang is-active" href="#" aria-label="Language English" aria-current="true">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="dt-hero" aria-label="Hero">
+  <div class="dt-hero__media" role="img" aria-label="Dominic Thiem Portrait"></div>
+
+  <div class="dt-hero__wrap">
+    <div class="dt-hero__content">
+      <p class="dt-hero__eyebrow">DOMINIC THIEM</p>
+
+      <h1 class="dt-hero__title">
+        From world-class athlete<br />
+        to impact personality.
+      </h1>
+
+      <p class="dt-hero__sub">
+        Conscious decisions in sport, in business, and in life.
+
+      </p>
+
+      <div class="dt-hero__pillars" aria-label="Key Pillars">
+        <span class="dt-hero__chip"><strong>Sport</strong> as the foundation</span>
+        <span class="dt-hero__chip"><strong>Values</strong> as the core</span>
+        <span class="dt-hero__chip"><strong>The future</strong> as the focus</span>
+      </div>
+
+     
+
+      <div class="dt-hero__meta" aria-label="Meta">
+        <div class="dt-hero__metaItem">
+          <span class="dt-hero__metaLabel">Focus</span>
+          <span class="dt-hero__metaValue">Sustainability · Performance · Investments</span>
+        </div>
+        <div class="dt-hero__metaItem">
+          <span class="dt-hero__metaLabel">Approach</span>
+          <span class="dt-hero__metaValue">Long-term · Strategic · Values-driven</span>
+        </div>
+      </div>
+    </div>
+
+    <a class="dt-hero__scroll" href="#content" aria-label="Scroll to content">
+      <span class="dt-hero__scrollLine"></span>
+      <span class="dt-hero__scrollText">Scroll</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* ===== HERO (Editorial Split) ===== */
+  :root{
+    --dt-text: rgba(255,255,255,.92);
+    --dt-muted: rgba(255,255,255,.70);
+    --dt-soft: rgba(255,255,255,.52);
+    --dt-border: rgba(255,255,255,.12);
+    --dt-radius: 22px;
+  }
+
+  .dt-hero{
+    position: relative;
+    min-height: clamp(700px, 100vh, 980px);
+    overflow: hidden;
+    background: #171717;
+  }
+
+  /* Background image layer */
+  .dt-hero__media{
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg,
+        rgba(0,0,0,.78) 0%,
+        rgba(0,0,0,.55) 26%,
+        rgba(0,0,0,.30) 46%,
+        rgba(0,0,0,.08) 70%,
+        rgba(0,0,0,0) 100%
+      ),
+      radial-gradient(1200px 520px at 18% 10%,
+        rgba(255,255,255,.08) 0%,
+        rgba(255,255,255,0) 60%
+      ),
+      url("../assets/media/dominic-thiem-hero-main.jpg");
+    background-size: cover;
+    background-position: center 18%;
+    transform: scale(1.02);
+  }
+
+  /* Soft vignette for depth (subtle) */
+  .dt-hero::after{
+    content:"";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(900px 420px at 15% 35%,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.35) 70%,
+      rgba(0,0,0,.55) 100%
+    );
+    opacity: .65;
+  }
+
+  .dt-hero__wrap{
+    position: relative;
+    z-index: 2;
+    width: min(1160px, calc(100% - 48px));
+    margin: 0 auto;
+    height: 100%;
+    min-height: inherit;
+    display: grid;
+    align-items: center;
+    padding: clamp(92px, 12vh, 140px) 0 clamp(28px, 5vh, 48px);
+  }
+
+.dt-hero__content{
+  transform: translateY(-28px);
+}
+
+@media (max-width: 860px){
+  .dt-hero__content{ transform: translateY(-12px); }
+}
+
+  /* Content column */
+  .dt-hero__content{
+    max-width: 560px;
+  }
+  
+  @media (min-width: 1280px){
+  .dt-hero__content{
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 1600px){
+  .dt-hero__content{
+    max-width: 700px;
+  }
+}
+
+  .dt-hero__eyebrow{
+    margin: 0 0 12px 0;
+    color: rgba(255,255,255,.72);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+
+  .dt-hero__title{
+    margin: 0 0 14px 0;
+    color: var(--dt-text);
+    font-weight: 500;
+    line-height: 1.03;
+    font-size: clamp(34px, 4.1vw, 64px);
+    text-wrap: balance;
+  }
+
+  .dt-hero__sub{
+    margin: 0;
+    color: var(--dt-muted);
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.65;
+    max-width: 54ch;
+  }
+
+  /* Chips */
+  .dt-hero__pillars{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .dt-hero__chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.22);
+    color: rgba(255,255,255,.70);
+    font-size: 13px;
+    line-height: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Make strong actually strong */
+  .dt-hero__chip strong{
+    font-weight: 850;
+    color: rgba(255,255,255,.95);
+    text-decoration: underline;
+    text-underline-offset: .18em;
+    text-decoration-thickness: .12em;
+  }
+
+  /* Actions */
+  .dt-hero__actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .dt-hero__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    padding: 0 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: .02em;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    will-change: transform;
+  }
+
+  .dt-hero__btn--primary{
+    background: rgba(255,255,255,.92);
+    color: rgba(0,0,0,.92) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+  }
+
+  .dt-hero__btn--ghost{
+    background: transparent;
+    color: rgba(255,255,255,.88);
+    border: 1px solid rgba(255,255,255,.18);
+  }
+
+  .dt-hero__btn:hover{ transform: translateY(-1px); }
+  .dt-hero__btn--ghost:hover{
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.26);
+  }
+
+  /* Meta */
+  .dt-hero__meta{
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    display: grid;
+    gap: 10px;
+    max-width: 520px;
+  }
+
+  .dt-hero__metaItem{
+    display: grid;
+    gap: 3px;
+  }
+
+  .dt-hero__metaLabel{
+    color: rgba(255,255,255,.46);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .dt-hero__metaValue{
+    color: rgba(255,255,255,.82);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Scroll cue */
+  .dt-hero__scroll{
+    position: absolute;
+    right: 0;
+    bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.62);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 10px 0 10px 12px;
+  }
+
+  .dt-hero__scrollLine{
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,.34);
+    display: inline-block;
+    transform-origin: left;
+    animation: dt-scroll 1.6s ease-in-out infinite;
+  }
+
+  @keyframes dt-scroll{
+    0%, 100%{ transform: scaleX(.55); opacity: .6; }
+    50%{ transform: scaleX(1); opacity: 1; }
+  }
+
+  /* Responsive */
+  @media (max-width: 860px){
+    .dt-hero__wrap{
+      padding: 96px 0 34px;
+    }
+    .dt-hero__content{
+      max-width: 620px;
+    }
+    .dt-hero__scroll{
+      right: auto;
+      left: 0;
+    }
+  }
+
+  @media (max-width: 520px){
+    .dt-hero__actions .dt-hero__btn{ width: 100%; }
+    .dt-hero__media{
+      background-position: center 10%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dt-hero__btn{ transition: none; }
+    .dt-hero__btn:hover{ transform: none; }
+    .dt-hero__scrollLine{ animation: none; }
+  }
+  
+
+</style>
+
+<section class="dt-partners" aria-label="Partner Ecosystem">
+  <div class="dt-partners__wrap">
+    <div class="dt-partners__grid">
+      
+      <div class="dt-partners__content">
+        <p class="dt-partners__eyebrow">Partner Ecosystem</p>
+        <h2 class="dt-partners__title">Partners as a reflection of values.</h2>
+
+        <div class="dt-partners__copy">
+          <p>
+            Partnerships are the most visible expression of the Dominic Thiem brand.
+            Each collaboration is built on a clear strategic alignment - authentic, intentional, and long-term.
+          </p>
+          <p>
+            The brands Dominic works with share his mindset around sustainability,
+            health, performance, and the future.
+          </p>
+        </div>
+
+        <div class="dt-partners__actions">
+          <a class="dt-partners__btn dt-partners__btn--primary" href="/partner">
+            Explore the Partner Ecosystem
+          </a>
+            
+            
+        </div>
+
+        <div class="dt-partners__notes">
+          <div class="dt-partners__note">
+            <span class="dt-partners__noteLabel">Principle</span>
+            <span class="dt-partners__noteValue">Long-term over campaign</span>
+          </div>
+         
+        </div>
+      </div>
+
+      
+      <div class="dt-partners__logos" role="list">
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="adidas">
+    <img
+      src="../assets/media/adidas-logo-new.png"
+      alt="adidas"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="Babolat">
+    <img
+      src="../assets/media/babolat-logo.png"
+      alt="Babolat"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+  
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="Burgenland Sport (Placeholder)">
+    <img
+      src="../assets/media/bowf-logo-white-1.png"
+      alt="Burgenland Sport (Placeholder)"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="Bitpanda">
+    <img
+      src="../assets/media/bitpanda-logo-white.png"
+      alt="Bitpanda"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="BMW">
+    <img
+      src="../assets/media/bmw-logo-white.png"
+      alt="BMW"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="ELK">
+    <img
+      src="../assets/media/elk-logo-white.png"
+      alt="ELK"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="Red Bull">
+    <img
+      src="../assets/media/rb-standard-logo-mono-neg-2017.png"
+      alt="Red Bull"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="Red Bull MOBILE">
+    <img
+      src="../assets/media/red-bull-mobile-logo.png"
+      alt="Red Bull MOBILE"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="Samsung">
+    <img
+      src="../assets/media/samsung-logo.webp"
+      alt="Samsung"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  <a class="dt-partners__logo" role="listitem" href="/partner" aria-label="Burgenland Sport">
+    <img
+      src="../assets/media/sportland-burgenland-logo-white.png"
+      alt="Burgenland Sport"
+      loading="lazy"
+      decoding="async"
+    />
+  </a>
+
+  
+  
+</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== Partner Ecosystem (Premium Pillar) ===== */
+  :root{
+    --dt-text: rgba(255,255,255,.88);
+    --dt-muted: rgba(255,255,255,.68);
+    --dt-soft: rgba(255,255,255,.52);
+    --dt-border: rgba(255,255,255,.10);
+    --dt-radius: 22px;
+  }
+
+.dt-partners{
+  padding: clamp(40px, 6vh, 96px) 0;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  /* Glow unten rechts – fließt aus dt-pillars (oben rechts)   background:
+    radial-gradient(
+      960px 520px at 86% 92%,
+      rgba(255,255,255,.06) 0%,
+      rgba(255,255,255,.032) 28%,
+      rgba(255,255,255,0) 62%
+    );*/
+    
+   background: transparent !important;
+
+}
+
+  .dt-partners__wrap{
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .dt-partners__grid{
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(18px, 4vw, 56px);
+    align-items: start;
+  }
+
+  /* Content */
+  .dt-partners__eyebrow{
+    margin: 0 0 10px 0;
+    color: var(--dt-soft);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .dt-partners__title{
+    margin: 0 0 16px 0;
+    color: var(--dt-text);
+    font-weight: 500;
+    line-height: 1.08;
+    font-size: clamp(26px, 2.6vw, 44px);
+    max-width: 20ch;
+  }
+
+  .dt-partners__copy p{
+    margin: 0 0 12px 0;
+    color: var(--dt-muted);
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.7;
+    max-width: 62ch;
+  }
+
+  .dt-partners__actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  /* Keep button shape even if theme overrides anchor styles */
+  .dt-partners__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: .02em;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease, opacity .15s ease;
+    will-change: transform;
+    white-space: nowrap;
+  font-weight: 400;
+  }
+
+  .dt-partners__btn--primary{
+    background: rgba(255,255,255,.92);
+    color: rgba(0,0,0,.92)!important;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+
+  .dt-partners__btn--ghost{
+    background: transparent;
+    color: rgba(255,255,255,.88);
+    border: 1px solid rgba(255,255,255,.16);
+  }
+
+  .dt-partners__btn:hover{ transform: translateY(-1px); }
+  .dt-partners__btn--ghost:hover{
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.22);
+  }
+
+  .dt-partners__notes{
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.10);
+    display: grid;
+    gap: 12px;
+    max-width: 520px;
+  }
+
+  .dt-partners__note{
+    display: grid;
+    gap: 4px;
+  }
+  .dt-partners__noteLabel{
+    color: rgba(255,255,255,.46);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .dt-partners__noteValue{
+    color: rgba(255,255,255,.82);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Panel */
+  .dt-partners__panel{
+    border: 1px solid var(--dt-border);
+    border-radius: var(--dt-radius);
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+  }
+
+  .dt-partners__panelHeader{
+    padding: 18px 18px 12px 18px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .dt-partners__panelTitle{
+    margin: 0 0 4px 0;
+    color: rgba(255,255,255,.86);
+    font-size: 14px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .dt-partners__panelSub{
+    margin: 0;
+    color: rgba(255,255,255,.55);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .dt-partners__logos{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 16px 18px 18px 18px;
+  }
+
+  /* Logo Tile */
+  .dt-partners__logo{
+    height: 70px;
+    padding: 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.18);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  font-weight: 400;
+  }
+
+  /* Fix theme forcing rounded images + make logos feel equally sized */
+  .dt-partners__logo img{
+    max-width: 78%;
+    max-height: 48px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 0 !important;
+    opacity: .92;
+  }
+
+  .dt-partners__logo:hover{
+    transform: translateY(-1px);
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.20);
+  }
+
+  .dt-partners__logo:hover img{
+    opacity: 1;
+  }
+
+  .dt-partners__panelFooter{
+    padding: 14px 18px 18px 18px;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+
+  .dt-partners__footCopy{
+    margin: 0;
+    color: rgba(255,255,255,.52);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  
+  
+
+  /* ===== Responsive ===== */
+  @media (max-width: 920px){
+    .dt-partners__grid{
+      grid-template-columns: 1fr;
+    }
+    .dt-partners__title{
+      max-width: 26ch;
+    }
+  }
+
+  @media (max-width: 520px){
+    .dt-partners__logos{
+      grid-template-columns: 1fr;
+    }
+    .dt-partners__btn{
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dt-partners__btn,
+    .dt-partners__logo{
+      transition: none;
+    }
+    .dt-partners__btn:hover,
+    .dt-partners__logo:hover{
+      transform: none;
+    }
+  }
+  
+  
+  .dt-partners__logos{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* was 2 */
+  gap: 14px;
+  padding: 16px 18px 18px 18px;
+}
+
+/* Reduce view height (Desktop) */
+.dt-partners{
+  min-height: 66vh; /* vorher 78vh */
+}
+
+/* Optional: auf Mobile wieder normal, sonst wird’s zu gedrückt */
+@media (max-width: 920px){
+  .dt-partners{
+    min-height: auto;
+    padding: clamp(40px, 6vh, 96px) 0;
+  }
+}
+
+.dt-partners{
+  position: relative;
+  isolation: isolate; /* keeps the glow behind content */
+}
+
+/* Full-width glow layer */
+.dt-partners::before{
+  content:"";
+  position:absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      960px 520px at 86% 92%,
+      rgba(255,255,255,.06) 0%,
+      rgba(255,255,255,.032) 28%,
+      rgba(255,255,255,0) 62%
+    );
+}
+
+/* Make the section full-bleed */
+.dt-partners{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* Center the orphan if the last row has only 1 item (works for 3-col grids) */
+.dt-partners__logos > .dt-partners__logo:last-child:nth-child(3n + 1){
+  grid-column: 2;
+}
+
+/* Make adidas logo slightly smaller */
+.dt-partners__logo[aria-label="adidas"] img{
+  transform: scale(0.68);
+}
+
+.dt-partners__logos{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap:14px;
+  padding:16px 18px 18px 18px;
+}
+
+.dt-partners__logo img{
+  max-width: 62%;   /* vorher 78% */
+  max-height: 38px; /* vorher 48px */
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  object-position:center;
+  border-radius:0 !important;
+  opacity:.92;
+}
+
+/* Individual logo size adjustments */
+
+.dt-partners__logo[aria-label="adidas"] img{
+  transform: scale(0.82); /* vorher kleiner */
+}
+
+.dt-partners__logo[aria-label="BMW"] img{
+  transform: scale(1.12);
+}
+
+.dt-partners__logo[aria-label="ELK"] img{
+  transform: scale(1.15);
+}
+
+/* Individual logo adjustments */
+
+.dt-partners__logo[aria-label="adidas"] img{
+  transform: scale(0.82);
+}
+
+.dt-partners__logo[aria-label="BMW"] img{
+  transform: scale(1.12);
+}
+
+.dt-partners__logo[aria-label="ELK"] img{
+  transform: scale(1.15);
+}
+
+.dt-partners__logo[aria-label="Samsung"] img{
+  transform: scale(0.85);
+}
+
+.dt-partners__logo[aria-label="Red Bull MOBILE"] img{
+  transform: scale(0.82);
+}
+
+</style>
+
+<section class="dt-pillarsA" aria-label="Strategic Pillars">
+  <div class="dt-pillarsA__wrap">
+
+    <header class="dt-pillarsA__header">
+      <p class="dt-pillarsA__eyebrow">Strategic Pillars</p>
+      <h2 class="dt-pillarsA__title">The pillars behind every decision.</h2>
+      <p class="dt-pillarsA__intro">
+        All partnerships, projects, and investments are built on four strategic pillars that guide Dominic Thiem's thinking and actions.
+      </p>
+    </header>
+
+    <div class="dt-pillarsA__grid">
+
+      
+      <article class="dt-pillarsA__card">
+        <div class="dt-pillarsA__top">
+          <span class="dt-pillarsA__num">01</span>
+        </div>
+        <h3 class="dt-pillarsA__titleCard">Sustainability</h3>
+        <p class="dt-pillarsA__desc">Living responsibility - not just communicating it.</p>
+      </article>
+
+      
+      <article class="dt-pillarsA__card">
+        <div class="dt-pillarsA__top">
+          <span class="dt-pillarsA__num">02</span>
+        </div>
+        <h3 class="dt-pillarsA__titleCard">Health &amp; Lifestyle</h3>
+        <p class="dt-pillarsA__desc">Long-term wellbeing as a daily decision.</p>
+      </article>
+
+      
+      <article class="dt-pillarsA__card">
+        <div class="dt-pillarsA__top">
+          <span class="dt-pillarsA__num">03</span>
+        </div>
+        <h3 class="dt-pillarsA__titleCard">High Performance Sport</h3>
+        <p class="dt-pillarsA__desc">Mentorship, values, and the next generation.</p>
+      </article>
+
+      
+      <article class="dt-pillarsA__card">
+        <div class="dt-pillarsA__top">
+          <span class="dt-pillarsA__num">04</span>
+        </div>
+        <h3 class="dt-pillarsA__titleCard">Future &amp; Investments</h3>
+        <p class="dt-pillarsA__desc">Entrepreneurship with a long-term vision.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+
+/* ===== Strategic Pillars – Clean Version (No Icons) ===== */
+
+:root{
+  --dt-text: rgba(255,255,255,.92);
+  --dt-muted: rgba(255,255,255,.68);
+  --dt-soft: rgba(255,255,255,.52);
+  --dt-border: rgba(255,255,255,.14);
+  --dt-card: rgba(255,255,255,.04);
+  --dt-card2: rgba(0,0,0,.28);
+}
+
+/* Section */
+.dt-pillarsA{
+  padding: clamp(44px, 7vh, 110px) 0;
+  background: transparent !important;
+}
+
+.dt-pillarsA__wrap{
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* Header */
+.dt-pillarsA__header{
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dt-pillarsA__eyebrow{
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--dt-soft);
+  margin: 0 0 10px;
+}
+
+.dt-pillarsA__title{
+  font-size: clamp(26px, 2.6vw, 46px);
+  line-height: 1.08;
+  margin: 0 0 12px;
+  color: var(--dt-text);
+}
+
+.dt-pillarsA__intro{
+  margin: 0 auto;
+  max-width: 74ch;
+  color: var(--dt-muted);
+  line-height: 1.7;
+}
+
+/* Grid */
+.dt-pillarsA__grid{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(12px, 1.6vw, 18px);
+  margin-top: clamp(18px, 3.4vh, 32px);
+}
+
+/* 4-up desktop */
+.dt-pillarsA__card{ grid-column: span 3; }
+
+/* 2-up tablet */
+@media (max-width: 1100px){
+  .dt-pillarsA__card{ grid-column: span 6; }
+}
+
+/* 1-up mobile */
+@media (max-width: 620px){
+  .dt-pillarsA__wrap{ width: min(1120px, calc(100% - 28px)); }
+  .dt-pillarsA__card{ grid-column: span 12; }
+}
+
+/* Card */
+.dt-pillarsA__card{
+  position: relative;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 26px;
+  padding: clamp(16px, 1.6vw, 20px);
+  background: linear-gradient(180deg, var(--dt-card), var(--dt-card2));
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+
+@media (hover:hover){
+  .dt-pillarsA__card:hover{
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,.18);
+    box-shadow: 0 22px 72px rgba(0,0,0,.45);
+  }
+}
+
+/* subtle highlight */
+.dt-pillarsA__card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background: radial-gradient(420px 220px at 18% 0%,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,0) 60%);
+  pointer-events:none;
+}
+
+/* Top row */
+.dt-pillarsA__top{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Number pill */
+.dt-pillarsA__num{
+  font-size: 12px;
+  letter-spacing: .18em;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--dt-border);
+  background: rgba(0,0,0,.25);
+  color: rgba(255,255,255,.84);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 8px 26px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  white-space: nowrap;
+}
+
+/* Text */
+.dt-pillarsA__titleCard{
+  margin: 8px 0 10px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: rgba(255,255,255,.90);
+  position: relative;
+  z-index: 1;
+}
+
+.dt-pillarsA__desc{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--dt-muted);
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile tightening */
+@media (max-width: 620px){
+  .dt-pillarsA__title{ font-size: clamp(24px, 7vw, 34px); }
+  .dt-pillarsA__titleCard{ font-size: 17px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .dt-pillarsA__card{ transition: none; }
+}
+
+/* force numbers left */
+.dt-pillarsA__top{
+  justify-content: flex-start !important;
+}
+
+</style>
+
+<section class="dt-umbrella" aria-label="Brand Ecosystem Dominic Thiem">
+  <div class="dt-umbrella__wrap">
+
+    <header class="dt-umbrella__header">
+      <p class="dt-umbrella__eyebrow">Brand Ecosystem</p>
+      <h2 class="dt-umbrella__title">Three brands. One ecosystem.</h2>
+      <p class="dt-umbrella__intro">
+        The Dominic Thiem brand ecosystem brings together three independent brands -
+        united by a shared mindset, a long-term ambition, and a clear impact.
+      </p>
+    </header>
+
+    <div class="dt-umbrella__grid">
+
+      
+      <a class="dt-umbrella__card" href="/projekte#energy" aria-label="Thiem Energy ansehen">
+          
+          <div class="dt-umbrella__visual" style="background-image:url('../assets/media/thiem-energy-hero.jpg')"></div>
+
+        <div class="dt-umbrella__cardTop">
+          <div class="dt-umbrella__logoBox">
+            <img
+              class="dt-umbrella__logo"
+              src="../assets/media/thiem-energy-logo.png"
+              alt="Thiem Energy"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
+        <div class="dt-umbrella__cardBody">
+          <h3 class="dt-umbrella__cardTitle">Sustainability &amp; Future Energy</h3>
+
+          <div class="dt-umbrella__copy">
+            <p>A new understanding of energy - fair, sustainable, and community-driven.</p>
+            <p>Thiem Energy stands for structural change rather than short-term solutions.</p>
+          </div>
+
+          <div class="dt-umbrella__mission">
+            <span class="dt-umbrella__missionLabel">Mission</span>
+            <span class="dt-umbrella__missionValue">
+              Rethinking energy - independent, responsible, future-proof.
+            </span>
+          </div>
+        </div>
+      </a>
+
+      
+      <a class="dt-umbrella__card" href="/projekte#academy" aria-label="Thiem Academy ansehen">
+          
+          <div class="dt-umbrella__visual" style="background-image:url('../assets/media/thiem-academy-hero.jpg')"></div>
+
+        <div class="dt-umbrella__cardTop">
+          <div class="dt-umbrella__logoBox">
+            <img
+              class="dt-umbrella__logo"
+              src="../assets/media/thiem-academy-burgenland-logo.webp"
+              alt="Thiem Academy Burgenland"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
+        <div class="dt-umbrella__cardBody">
+          <h3 class="dt-umbrella__cardTitle">Sport, Values &amp; Next Generation</h3>
+
+          <div class="dt-umbrella__copy">
+            <p>Sport is more than performance - it shapes mindset, character, and responsibility.</p>
+            <p>The academy combines high-performance sport with personal development.</p>
+          </div>
+
+          <div class="dt-umbrella__mission">
+            <span class="dt-umbrella__missionLabel">Mission</span>
+            <span class="dt-umbrella__missionValue">
+              Sport as a tool for mindset, responsibility, and the future.
+            </span>
+          </div>
+        </div>
+      </a>
+
+      
+      <a class="dt-umbrella__card" href="/projekte#view" aria-label="Thiem View ansehen">
+          <div class="dt-umbrella__visual" style="background-image:url('../assets/media/thiem-view-hero.jpg')"></div>
+
+        <div class="dt-umbrella__cardTop">
+          <div class="dt-umbrella__logoBox">
+            <img
+              class="dt-umbrella__logo"
+              src="../assets/media/thiem-view-logo-white.png"
+              alt="Thiem View"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
+        <div class="dt-umbrella__cardBody">
+          <h3 class="dt-umbrella__cardTitle">Sport, Lifestyle &amp; Sustainability</h3>
+
+          <div class="dt-umbrella__copy">
+            <p>Functional design for sport and everyday life - with a clear commitment to sustainability.</p>
+            <p>Quality, responsibility, and timeless aesthetics are at the core.</p>
+          </div>
+
+          <div class="dt-umbrella__mission">
+            <span class="dt-umbrella__missionLabel">Mission</span>
+            <span class="dt-umbrella__missionValue">
+              Rethinking style - sustainably made, consciously worn.
+            </span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ===== Dachmarke / Umbrella ===== */
+
+.dt-umbrella{
+  padding: clamp(40px, 6vh, 96px) 0;
+  position: relative;
+     background: transparent !important;
+}
+
+.dt-umbrella__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.dt-umbrella__header{
+  max-width: 860px;
+  margin-bottom: clamp(16px, 2.4vw, 26px);
+}
+
+.dt-umbrella__eyebrow{
+  margin: 0 0 10px 0;
+  color: rgba(255,255,255,.52);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.dt-umbrella__title{
+  margin: 0 0 12px 0;
+  color: rgba(255,255,255,.88);
+  font-weight: 500;
+  line-height: 1.08;
+  font-size: clamp(26px, 2.6vw, 44px);
+  max-width: 30ch;
+}
+
+.dt-umbrella__intro{
+  margin: 0;
+  color: rgba(255,255,255,.68);
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.7;
+  max-width: 78ch;
+}
+
+.dt-umbrella__grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+/* Card (clickable) */
+.dt-umbrella__card{
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+  position: relative;
+}
+
+/* Hover effect (keep) */
+.dt-umbrella__card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.22);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+}
+
+/* Soft highlight overlay (keep, NO arrows) */
+.dt-umbrella__card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(720px 240px at 18% 14%,
+    rgba(255,255,255,.10),
+    rgba(255,255,255,0) 55%
+  );
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.dt-umbrella__card:hover::after{ opacity: .55; }
+
+.dt-umbrella__card:focus-visible{
+  outline: 2px solid rgba(255,255,255,.35);
+  outline-offset: 3px;
+}
+
+/* Top */
+.dt-umbrella__cardTop{
+  padding: 18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Logo Zone (bigger, normalized) */
+.dt-umbrella__logoBox{
+  height: 62px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.30);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ✅ zentriert */
+}
+
+.dt-umbrella__logo{
+  max-height: 46px;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  margin: 0 auto;
+}
+
+/* Body */
+.dt-umbrella__cardBody{
+  padding: 16px 18px 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.dt-umbrella__cardTitle{
+  margin: 0 0 10px 0;
+  color: rgba(255,255,255,.86);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.dt-umbrella__copy p{
+  margin: 0 0 10px 0;
+  color: rgba(255,255,255,.68);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.dt-umbrella__copy p:last-child{ margin-bottom: 0; }
+
+/* Mission Note */
+.dt-umbrella__mission{
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  display: grid;
+  gap: 4px;
+}
+
+.dt-umbrella__missionLabel{
+  color: rgba(255,255,255,.46);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.dt-umbrella__missionValue{
+  color: rgba(255,255,255,.82);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 1100px){
+  .dt-umbrella__grid{ grid-template-columns: 1fr; }
+  .dt-umbrella__logoBox{ width: 100%; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .dt-umbrella__card,
+  .dt-umbrella__card::after{
+    transition: none;
+  }
+  .dt-umbrella__card:hover{ transform: none; }
+}
+
+/* --- Visual Header (Image) --- */
+.dt-umbrella__visual{
+  position: relative;
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
+  transition: transform .35s ease, filter .35s ease;
+  filter: saturate(.95) contrast(.98);
+}
+
+/* Dark premium fade like the DT hero */
+.dt-umbrella__visual::after{
+  content:"";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,.05) 0%,
+      rgba(0,0,0,.35) 55%,
+      rgba(0,0,0,.78) 100%
+    );
+  opacity: .9;
+}
+
+/* Make the logo row sit ON TOP of the image */
+.dt-umbrella__cardTop{
+  margin-top: -46px;              /* pulls the logo box over the image */
+  border-bottom: 0;              /* optional: cleaner */
+  padding-top: 0;
+}
+
+/* Give the logo row a glass pill background */
+.dt-umbrella__logoBox{
+  height: 62px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.30);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Hover: subtle zoom for “alive” feeling */
+.dt-umbrella__card:hover .dt-umbrella__visual{
+  transform: scale(1.06);
+  filter: saturate(1.02) contrast(1.02);
+}
+
+/* force logo images to have no border radius */
+.dt-umbrella .dt-umbrella__logo,
+.dt-umbrella .dt-umbrella__logoBox img,
+.dt-umbrella__cardTop img{
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  clip-path: none !important;
+  overflow: visible !important;
+}
+
+/* Thiem Energy image slightly lower */
+.dt-umbrella__card[href="/projekte#energy"] .dt-umbrella__visual{
+  background-position: center 10%;
+}
+
+/* Thiem Energy image slightly lower */
+.dt-umbrella__card[href="/projekte#view"] .dt-umbrella__visual{
+  background-position: center 80%;
+}
+
+/* Thiem Energy image slightly lower */
+.dt-umbrella__card[href="/projekte#academy"] .dt-umbrella__visual{
+  background-position: center 70%;
+}
+</style>
+
+<section class="dt-portfolio" aria-label="Portfolio Teaser">
+  <div class="dt-portfolio__wrap">
+    <div class="dt-portfolio__card">
+      <div class="dt-portfolio__content">
+        <p class="dt-portfolio__eyebrow">Portfolio</p>
+        <h2 class="dt-portfolio__title">Investing with conviction.</h2>
+
+        <p class="dt-portfolio__copy">
+          Dominic Thiem invests selectively in companies that connect innovation, sustainability, health, sport, and community. Every investment follows a clear principle: long-term value over short-term trends. <br><br>
+          His investments are driven by personal conviction, hands-on experience, and a clear ambition to support projects that create a positive impact on everyday life, health, and the future.
+        </p>
+
+        <div class="dt-portfolio__actions">
+          <a class="dt-portfolio__btn dt-portfolio__btn--primary" href="/investments">
+            View investments
+          </a>
+        </div>
+      </div>
+
+      
+      <aside class="dt-portfolio__aside" aria-label="Investment Focus">
+        <div class="dt-portfolio__asideHeader">
+          <p class="dt-portfolio__asideTitle">Focus Areas</p>
+        </div>
+
+        <div class="dt-portfolio__bubbles" aria-label="Focus areas">
+          <div class="dt-portfolio__bubble dt-portfolio__bubble--top-left">
+            <span class="dt-portfolio__bubbleLabel">Innovation</span>
+          </div>
+
+          <div class="dt-portfolio__bubble dt-portfolio__bubble--top-right">
+            <span class="dt-portfolio__bubbleLabel">Health</span>
+          </div>
+
+          <div class="dt-portfolio__bubble dt-portfolio__bubble--center dt-portfolio__bubble--large">
+            <span class="dt-portfolio__bubbleLabel">Sustainability</span>
+          </div>
+
+          <div class="dt-portfolio__bubble dt-portfolio__bubble--bottom-left">
+            <span class="dt-portfolio__bubbleLabel">Sport</span>
+          </div>
+
+          <div class="dt-portfolio__bubble dt-portfolio__bubble--bottom-right">
+            <span class="dt-portfolio__bubbleLabel">Community</span>
+          </div>
+
+          
+          <span class="dt-portfolio__bubbleMini dt-portfolio__bubbleMini--left" aria-hidden="true"></span>
+          <span class="dt-portfolio__bubbleMini dt-portfolio__bubbleMini--right" aria-hidden="true"></span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root{
+    --dt-text: rgba(255,255,255,.88);
+    --dt-muted: rgba(255,255,255,.68);
+    --dt-soft: rgba(255,255,255,.52);
+    --dt-border: rgba(255,255,255,.10);
+    --dt-radius: 22px;
+  }
+
+  .dt-portfolio{
+    padding: clamp(28px, 4vw, 64px) 0;
+    min-height: 56vh;
+    display: grid;
+    align-items: center;
+    position: relative;
+    background: transparent !important;
+  }
+
+  .dt-portfolio__wrap{
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .dt-portfolio__card{
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: clamp(16px, 3.2vw, 44px);
+    padding: clamp(18px, 2.6vw, 32px);
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 22px;
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.015)
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .dt-portfolio__eyebrow{
+    margin: 0 0 10px 0;
+    color: var(--dt-soft);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .dt-portfolio__title{
+    margin: 0 0 14px 0;
+    color: var(--dt-text);
+    font-weight: 500;
+    line-height: 1.08;
+    font-size: clamp(26px, 2.6vw, 44px);
+    max-width: 22ch;
+  }
+
+  .dt-portfolio__copy{
+    margin: 0;
+    color: var(--dt-muted);
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.7;
+    max-width: 66ch;
+  }
+
+  .dt-portfolio__actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .dt-portfolio__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: .02em;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    will-change: transform;
+  }
+
+  .dt-portfolio__btn--primary{
+    background: rgba(255,255,255,.92) !important;
+    color: rgba(0,0,0,.92) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+  }
+
+  .dt-portfolio__btn--primary:hover,
+  .dt-portfolio__btn--primary:focus,
+  .dt-portfolio__btn--primary:active,
+  .dt-portfolio__btn--primary:visited{
+    color: rgba(0,0,0,.92) !important;
+  }
+
+  .dt-portfolio__aside{
+    border-left: 1px solid rgba(255,255,255,.10);
+    padding-left: clamp(14px, 2vw, 22px);
+    align-self: stretch;
+  }
+
+  .dt-portfolio__asideHeader{
+    margin-bottom: 12px;
+  }
+
+  .dt-portfolio__asideTitle{
+    margin: 0 0 4px 0;
+    color: rgba(255,255,255,.86);
+    font-size: 14px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  /* Bubble cluster */
+  .dt-portfolio__bubbles{
+    position: relative;
+    width: 420px;
+    height: 420px;
+    margin: 18px auto 10px auto;
+    display: block;
+  }
+
+  .dt-portfolio__bubble{
+    position: absolute;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    border: 3px solid rgba(255,255,255,.60);
+    background: radial-gradient(
+      120px 120px at 30% 30%,
+      rgba(255,255,255,.10),
+      rgba(0,0,0,.30) 70%
+    );
+    box-shadow:
+      0 18px 36px rgba(0,0,0,.35),
+      inset 0 0 0 1px rgba(255,255,255,.06);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    animation: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .dt-portfolio__bubble--large{
+    width: 190px;
+    height: 190px;
+    z-index: 3;
+  }
+
+  .dt-portfolio__bubbleLabel{
+    display: block;
+    margin: 0 !important;
+    padding: 0 14px;
+    color: rgba(255,255,255,.88) !important;
+    font-size: 12px !important;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center !important;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+
+  /* X / diagonal positioning */
+  .dt-portfolio__bubble--center{
+    top: 115px;
+    left: 115px;
+  }
+
+  .dt-portfolio__bubble--top-left{
+    top: 14px;
+    left: 24px;
+    z-index: 2;
+  }
+
+  .dt-portfolio__bubble--top-right{
+    top: 14px;
+    right: 24px;
+    z-index: 2;
+  }
+
+  .dt-portfolio__bubble--bottom-left{
+    bottom: 14px;
+    left: 24px;
+    z-index: 2;
+  }
+
+  .dt-portfolio__bubble--bottom-right{
+    bottom: 14px;
+    right: 24px;
+    z-index: 2;
+  }
+
+  .dt-portfolio__bubbleMini{
+    display: none !important;
+  }
+
+  @media (max-width: 920px){
+    .dt-portfolio__card{
+      grid-template-columns: 1fr;
+    }
+
+    .dt-portfolio__aside{
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 16px;
+    }
+
+    .dt-portfolio__bubbles{
+      width: 380px;
+      height: 380px;
+    }
+
+    .dt-portfolio__bubble{
+      width: 104px;
+      height: 104px;
+    }
+
+    .dt-portfolio__bubble--large{
+      width: 176px;
+      height: 176px;
+    }
+
+    .dt-portfolio__bubble--center{
+      top: 102px;
+      left: 102px;
+    }
+
+    .dt-portfolio__bubble--top-left{
+      top: 10px;
+      left: 18px;
+    }
+
+    .dt-portfolio__bubble--top-right{
+      top: 10px;
+      right: 18px;
+    }
+
+    .dt-portfolio__bubble--bottom-left{
+      bottom: 10px;
+      left: 18px;
+    }
+
+    .dt-portfolio__bubble--bottom-right{
+      bottom: 10px;
+      right: 18px;
+    }
+  }
+
+  @media (max-width: 520px){
+    .dt-portfolio__wrap{
+      width: min(1120px, calc(100% - 28px));
+    }
+
+    .dt-portfolio__btn{
+      width: 100%;
+    }
+
+    .dt-portfolio__bubbles{
+      width: 308px;
+      height: 308px;
+    }
+
+    .dt-portfolio__bubble{
+      width: 96px;
+      height: 96px;
+    }
+
+    .dt-portfolio__bubble--large{
+      width: 136px;
+      height: 136px;
+    }
+
+    .dt-portfolio__bubbleLabel{
+      font-size: 10.5px !important;
+      letter-spacing: .06em;
+      padding: 0 10px;
+    }
+
+    .dt-portfolio__bubble--center{
+      top: 86px;
+      left: 86px;
+    }
+
+    .dt-portfolio__bubble--top-left{
+      top: 6px;
+      left: 10px;
+    }
+
+    .dt-portfolio__bubble--top-right{
+      top: 6px;
+      right: 10px;
+    }
+
+    .dt-portfolio__bubble--bottom-left{
+      bottom: 6px;
+      left: 10px;
+    }
+
+    .dt-portfolio__bubble--bottom-right{
+      bottom: 6px;
+      right: 10px;
+    }
+  }
+  
+</style>
+
+<section class="dt-social" aria-label="Social Preview">
+  <div class="dt-social__wrap">
+
+    <header class="dt-social__header">
+      <p class="dt-social__eyebrow">On socials</p>
+      <h2 class="dt-social__title">What’s up on social media.</h2>
+      <p class="dt-social__sub">
+      </p>
+    </header>
+
+    <div class="dt-social__stage" aria-label="Social cards carousel">
+
+      <div class="dt-social__fan" role="list">
+
+        
+        <a class="dt-social__card" role="listitem" href="#" data-index="0" tabindex="0">
+          <img src="../assets/media/instagram-post-1.png" alt="Instagram post 1" />
+          <span class="dt-social__overlay"></span>
+        </a>
+
+        
+        <a class="dt-social__card" role="listitem" href="#" data-index="1" tabindex="0">
+          <img src="../assets/media/instagram-post-2.png" alt="Instagram post 2" />
+          <span class="dt-social__overlay"></span>
+        </a>
+
+        
+        <a class="dt-social__card" role="listitem" href="#" data-index="2" tabindex="0">
+          <img src="../assets/media/instagram-post-featured.png" alt="Instagram featured post" />
+          <span class="dt-social__overlay"></span>
+        </a>
+
+        
+        <a class="dt-social__card" role="listitem" href="#" data-index="3" tabindex="0">
+          <img src="../assets/media/instagram-post-4.png" alt="Instagram post 4" />
+          <span class="dt-social__overlay"></span>
+        </a>
+
+        
+        <a class="dt-social__card" role="listitem" href="#" data-index="4" tabindex="0">
+          <img src="../assets/media/instagram-post-5.png" alt="Instagram post 5" />
+          <span class="dt-social__overlay"></span>
+        </a>
+
+      </div>
+
+      <div class="dt-social__actions">
+        <a class="dt-social__btn dt-social__btn--primary"
+           href="https://www.instagram.com/domithiem/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Instagram
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+:root{
+  --dt-text: rgba(255,255,255,.9);
+  --dt-muted: rgba(255,255,255,.7);
+  --dt-border: rgba(255,255,255,.1);
+}
+
+.dt-social{
+  padding: 100px 0;
+}
+
+.dt-social__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.dt-social__header{
+  max-width: 760px;
+  margin: 0 auto 40px auto;
+  text-align: center;
+}
+
+.dt-social__eyebrow{
+  color: var(--dt-muted);
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.dt-social__title{
+  margin: 12px 0;
+  color: var(--dt-text);
+  font-size: 42px;
+}
+
+.dt-social__sub{
+  color: var(--dt-muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.dt-social__stage{
+  border: 1px solid var(--dt-border);
+  border-radius: 28px;
+  padding: 40px;
+}
+
+.dt-social__fan{
+  position: relative;
+  height: 480px;
+  display: grid;
+  place-items: center;
+}
+
+.dt-social__card{
+  position: absolute;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 30px;
+  overflow: hidden;
+  transform: translateX(var(--x, 0px)) scale(var(--s, 1));
+  z-index: var(--z, 1);
+  transition: .5s cubic-bezier(.2,.9,.2,1);
+}
+
+.dt-social__card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dt-social__overlay{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.1), rgba(0,0,0,.6));
+}
+
+.dt-social__actions{
+  display: flex;
+  gap: 14px;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.dt-social__btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: .02em !important;
+
+  color: #ffffff !important;              /* ← TEXT ERZWUNGEN */
+  background: transparent;
+
+  transition: transform .15s ease, background .15s ease;
+}
+
+.dt-social__btn--primary{
+  background: #ffffff !important;
+  color: #000000 !important;              /* schwarzer Text auf weißem Button */
+  border: none !important;
+}
+
+.dt-social__btn--ghost{
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,.35) !important;
+  color: #ffffff !important;              /* ← WEISS ERZWUNGEN */
+}
+
+.dt-social__btn:hover{
+  transform: translateY(-2px);
+}
+
+</style>
+
+<script>
+(function(){
+  const fan = document.querySelector('.dt-social__fan');
+  if(!fan) return;
+
+  const cards = Array.from(fan.querySelectorAll('.dt-social__card'));
+  let active = 2;
+
+  const presets = {
+    "-2": { x: -260, s: 0.92, z: 1 },
+    "-1": { x: -130, s: 0.96, z: 2 },
+    "0":  { x: 0,    s: 1,    z: 5 },
+    "1":  { x: 130,  s: 0.96, z: 2 },
+    "2":  { x: 260,  s: 0.92, z: 1 }
+  };
+
+  function offsetFor(i){
+    let o = i - active;
+    if(o > 2) o -= cards.length;
+    if(o < -2) o += cards.length;
+    return Math.max(-2, Math.min(2, o));
+  }
+
+  function apply(){
+    cards.forEach((card, i) => {
+      const o = offsetFor(i);
+      const p = presets[o];
+      card.style.setProperty('--x', p.x + 'px');
+      card.style.setProperty('--s', p.s);
+      card.style.setProperty('--z', p.z);
+    });
+  }
+
+  cards.forEach((card, i)=>{
+    card.addEventListener('click', e=>{
+      e.preventDefault();
+      active = i;
+      apply();
+    });
+  });
+
+  apply();
+})();
+</script>
+
+<section class="dt-store" aria-label="Store Feature">
+  <div class="dt-store__wrap">
+    <div class="dt-store__grid">
+      
+      <div class="dt-store__content">
+        <p class="dt-store__eyebrow">Shop</p>
+
+        <h2 class="dt-store__title">
+          Greatest Moments.<br />
+          A collector's piece.
+        </h2>
+
+        <p class="dt-store__sub">
+          A premium coffee table book featuring personal highlights, iconic matches, and defining moments from Dominic's career - curated, clean, and built to last.
+        </p>
+
+        <div class="dt-store__actions">
+          <a class="dt-store__btn dt-store__btn--primary" href="https://shop.dominicthiem.com/">Go to shop</a>
+          <a class="dt-store__btn dt-store__btn--ghost" href="https://shop.dominicthiem.com/en/products/dominic-thiem-buch-my-greatest-moments">More details</a>
+        </div>
+
+        <div class="dt-store__facts" aria-label="Highlights">
+          <div class="dt-store__fact">
+            <span class="dt-store__factLabel">Format</span>
+            <span class="dt-store__factValue">Hardcover · Premium Print</span>
+          </div>
+          <div class="dt-store__fact">
+            <span class="dt-store__factLabel">Edition</span>
+            <span class="dt-store__factValue">Limited · Collector-focused</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="dt-store__stage" aria-label="Featured product stage">
+        <div class="dt-store__panel">
+          <div class="dt-store__panelTop">
+            <p class="dt-store__panelKicker">Featured</p>
+            <div class="dt-store__panelMeta">
+              <span class="dt-store__price">€34,90</span>
+              <span class="dt-store__dot">•</span>
+              <span class="dt-store__ship">Shipping EU/Worldwide</span>
+            </div>
+          </div>
+
+          
+          <figure class="dt-store__hero" aria-label="Product visual">
+            <img
+              class="dt-store__heroImg"
+              src="../assets/media/domi-thiem-greatest-moments-cover.webp"
+              alt="Greatest Moments cover"
+              loading="eager"
+              decoding="async"
+            />
+            <span class="dt-store__heroOverlay" aria-hidden="true"></span>
+          </figure>
+
+          
+          <div class="dt-store__thumbs" role="list" aria-label="Product gallery">
+            <button class="dt-store__thumb is-active" type="button" role="listitem"
+              data-src="../assets/media/domi-thiem-greatest-moments-cover.webp"
+              aria-label="View cover">
+              <img src="../assets/media/domi-thiem-greatest-moments-cover.webp" alt="Cover thumbnail" loading="lazy" decoding="async">
+            </button>
+
+            <button class="dt-store__thumb" type="button" role="listitem"
+              data-src="../assets/media/greatest-moments-book-photo-3.webp"
+              aria-label="View book photo 3">
+              <img src="../assets/media/greatest-moments-book-photo-3.webp" alt="Book photo 3 thumbnail" loading="lazy" decoding="async">
+            </button>
+
+            <button class="dt-store__thumb" type="button" role="listitem"
+              data-src="../assets/media/greatest-moments-book-photo-1.jpg"
+              aria-label="View book photo 1">
+              <img src="../assets/media/greatest-moments-book-photo-1.jpg" alt="Book photo 1 thumbnail" loading="lazy" decoding="async">
+            </button>
+
+            <button class="dt-store__thumb" type="button" role="listitem"
+              data-src="../assets/media/greatest-moments-book-photo-5.webp"
+              aria-label="View book photo 5">
+              <img src="../assets/media/greatest-moments-book-photo-5.webp" alt="Book photo 5 thumbnail" loading="lazy" decoding="async">
+            </button>
+
+            
+            <button class="dt-store__thumb" type="button" role="listitem"
+              data-src="../assets/media/greatest-moments-book-photo-4.webp"
+              aria-label="View book photo 4">
+              <img src="../assets/media/greatest-moments-book-photo-4.webp" alt="Book photo 4 thumbnail" loading="lazy" decoding="async">
+            </button>
+          </div>
+
+          <div class="dt-store__panelActions">
+            <a class="dt-store__btn dt-store__btn--primary" href="https://shop.dominicthiem.com/en/products/dominic-thiem-buch-my-greatest-moments">Jetzt kaufen</a>
+            <a class="dt-store__btn dt-store__btn--ghost" href="https://shop.dominicthiem.com/en/collections/all">Alle Produkte</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :root{
+    --dt-text: rgba(255,255,255,.90);
+    --dt-muted: rgba(255,255,255,.68);
+    --dt-soft: rgba(255,255,255,.50);
+    --dt-border: rgba(255,255,255,.10);
+    --dt-radius: 22px;
+    --dt-thumb-radius: 14px; /* ✅ keep consistent */
+  }
+
+  /* === DT STORE: content centered, background full width === */
+  .dt-store{
+    position: relative;
+    padding: clamp(44px, 7vh, 110px) 0;
+    background: none;
+    overflow: visible !important;
+    z-index: 0;
+
+    /* ✅ more mobile-friendly overall */
+    min-height: 70vh;
+    display: grid;
+    align-items: center;
+  }
+
+  .dt-store::before{
+    content:"";
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    z-index: -1;
+    
+       background: transparent !important;
+
+  /* === DT STORE: content centered, background full width === */
+
+    background:
+      radial-gradient(900px 520px at 14% 18%, rgba(255,255,255,.06) 0%, rgba(255,255,255,.03) 28%, rgba(255,255,255,0) 62%),
+      radial-gradient(900px 520px at 86% 86%, rgba(255,255,255,.05) 0%, rgba(255,255,255,.028) 28%, rgba(255,255,255,0) 62%);
+  }
+
+  .dt-store__wrap{
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .dt-store__grid{
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(18px, 4vw, 56px);
+    align-items: center;
+  }
+
+  .dt-store__eyebrow{
+    margin: 0 0 10px 0;
+    color: var(--dt-soft);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .dt-store__title{
+    margin: 0 0 12px 0;
+    color: var(--dt-text);
+    font-weight: 500;
+    line-height: 1.08;
+    font-size: clamp(26px, 2.8vw, 46px);
+    max-width: 22ch;
+  }
+
+  .dt-store__sub{
+    margin: 0;
+    color: var(--dt-muted);
+    font-family: var(--dt-font-primary);
+    font-weight: 400;
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.7;
+    max-width: 64ch;
+  }
+
+  .dt-store__actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .dt-store__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: .02em;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    will-change: transform;
+    white-space: nowrap;
+  }
+
+  .dt-store__btn--primary{
+    background: rgba(255,255,255,.92);
+    color: rgba(0,0,0,.92) !important;
+    border: 1px solid rgba(255,255,255,.12);
+  }
+
+  .dt-store__btn--ghost{
+    background: transparent;
+    color: rgba(255,255,255,.88);
+    border: 1px solid rgba(255,255,255,.16);
+  }
+
+  .dt-store__btn:hover{ transform: translateY(-1px); }
+  .dt-store__btn--ghost:hover{
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.22);
+  }
+
+  .dt-store__facts{
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.10);
+    display: grid;
+    gap: 12px;
+    max-width: 520px;
+  }
+
+  .dt-store__fact{ display: grid; gap: 4px; }
+  .dt-store__factLabel{
+    color: rgba(255,255,255,.46);
+    font-size: 12px;
+    font-family: var(--dt-font-primary);
+    font-weight: 400;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .dt-store__factValue{
+    color: rgba(255,255,255,.82);
+    font-size: 14px;
+    font-family: var(--dt-font-primary);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Stage / panel */
+  .dt-store__stage{
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: auto !important;
+    min-height: unset !important;
+    max-height: 520px;
+  }
+
+  .dt-store__panel{
+    width: 100%;
+    border: 1px solid var(--dt-border);
+    border-radius: calc(var(--dt-radius) + 10px);
+    background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+    box-shadow: 0 26px 70px rgba(0,0,0,.45);
+    padding: 16px 16px 18px 16px;
+    max-height: 520px;
+  }
+
+  .dt-store__panelTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 2px 2px 12px 2px;
+  }
+
+  .dt-store__panelKicker{
+    margin: 0;
+    color: rgba(255,255,255,.72);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.20);
+  }
+
+  .dt-store__panelMeta{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.62);
+    font-size: 13px;
+  }
+  .dt-store__price{
+    color: rgba(255,255,255,.90);
+    font-weight: 700;
+  }
+  .dt-store__dot{ opacity: .6; }
+
+  /* Hero image */
+  .dt-store__hero{
+    margin: 0;
+    border-radius: 26px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.18);
+    position: relative;
+    aspect-ratio: 4 / 3;
+    max-height: 320px;
+  }
+
+  .dt-store__heroImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.02);
+    transition: opacity .25s ease, transform .35s ease;
+  }
+
+  .dt-store__heroOverlay{
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(640px 320px at 30% 20%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%),
+      linear-gradient(to bottom, rgba(0,0,0,.06), rgba(0,0,0,.40));
+    opacity: .95;
+  }
+
+  /* Thumbs */
+  .dt-store__thumbs{
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* ✅ 5 thumbs */
+    gap: 10px;
+  }
+
+  /* ✅ Elementor override-safe: force radius/border for button + image */
+  .dt-store__thumb{
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    background: rgba(0,0,0,.18) !important;
+    border-radius: var(--dt-thumb-radius) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    cursor: pointer;
+    height: 56px;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+
+  .dt-store__thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: .90;
+    transform: scale(1.02);
+    border-radius: var(--dt-thumb-radius) !important; /* ✅ ensures rounded corners even if Elementor touches img */
+  }
+
+  .dt-store__thumb:hover{
+    transform: translateY(-1px);
+    border-color: rgba(255,255,255,.20) !important;
+    background: rgba(255,255,255,.06) !important;
+  }
+
+  .dt-store__thumb.is-active{
+    border-color: rgba(255,255,255,.28) !important;
+    box-shadow: 0 8px 26px rgba(0,0,0,.35);
+  }
+  .dt-store__thumb.is-active img{ opacity: 1; }
+
+  .dt-store__panelActions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  /* ✅ Mobile friendly: better spacing, no forced 70vh */
+  @media (max-width: 980px){
+    .dt-store{
+      min-height: auto;
+      display: block;
+    }
+    .dt-store__grid{ grid-template-columns: 1fr; }
+    .dt-store__stage,
+    .dt-store__panel{
+      max-height: none;
+    }
+    .dt-store__hero{ max-height: none; }
+    .dt-store__thumbs{ grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 520px){
+    .dt-store__wrap{ width: min(1120px, calc(100% - 28px)); } /* a bit more breathing room */
+    .dt-store__actions .dt-store__btn,
+    .dt-store__panelActions .dt-store__btn{ width: 100%; }
+    .dt-store__thumb{ height: 64px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dt-store__btn,
+    .dt-store__thumb,
+    .dt-store__heroImg{
+      transition: none;
+    }
+  }
+  .dt-store__hero{
+  margin: 0;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.18);
+  position: relative;
+
+  aspect-ratio: 4 / 3;
+  max-height: 320px;
+
+  /* wichtig */
+  display: grid;
+  place-items: center;
+}
+
+.dt-store__heroImg{
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;      /* zeigt komplettes Buch */
+  object-position: center;  /* exakt mittig */
+
+  display: block;
+
+  transform: none;
+}
+  
+  
+  .dt-store__heroImg{
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center 35%; /* verschiebt Bild nach oben */
+
+  display: block;
+
+  transform: none;
+}
+
+.dt-store__heroImg{
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  display: block;
+
+  transform: none;
+  translate: 0 -52px; /* Bild nach oben */
+}
+
+</style>
+
+<script>
+  (function(){
+    const root = document.querySelector('.dt-store');
+    if(!root) return;
+
+    const heroImg = root.querySelector('.dt-store__heroImg');
+    const thumbs = Array.from(root.querySelectorAll('.dt-store__thumb'));
+    if(!heroImg || thumbs.length === 0) return;
+
+    thumbs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.getAttribute('data-src');
+        if(!src) return;
+
+        thumbs.forEach(t => t.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        heroImg.style.opacity = '0';
+        setTimeout(() => {
+          heroImg.src = src;
+          heroImg.style.transform = 'scale(1.04)';
+          heroImg.onload = () => {
+            heroImg.style.opacity = '1';
+            heroImg.style.transform = 'scale(1.02)';
+          };
+        }, 120);
+      });
+    });
+  })();
+</script>
+
+<section class="dt-autograph" aria-label="Autograph card">
+  <div class="dt-autograph__wrap">
+    <div class="dt-autograph__card">
+
+      
+      <div class="dt-autograph__content">
+        <p class="dt-autograph__eyebrow">Autograph</p>
+        <h2 class="dt-autograph__title">Signed autograph card</h2>
+
+        <p class="dt-autograph__lead">
+          Receive a signed autograph card from Dominic -
+          please send a stamped, self-addressed envelope to:
+        </p>
+
+        
+        <div
+          class="dt-autograph__address dt-reveal"
+          data-reveal
+          tabindex="0"
+          role="button"
+          aria-expanded="false"
+          aria-label="Show address"
+        >
+          <p class="dt-autograph__name">Christine Reindl</p>
+          <p>Michael Hainischstraße 32/7</p>
+          <p>2493 Lichtenwörth</p>
+
+          <span class="dt-reveal__hint">Show address</span>
+        </div>
+
+        <p class="dt-autograph__note">
+          Please note that autographs from Dominic are only available on official autograph cards.
+          Signing of externally provided items is not possible. We appreciate your understanding.
+        </p>
+
+        <div class="dt-autograph__actions">
+          <a href="https://shop.dominicthiem.com/" class="dt-autograph__btn dt-autograph__btn--ghost">
+            Go to shop
+          </a>
+          <a href="/kontakt" class="dt-autograph__btn dt-autograph__btn--primary">
+            Contact
+          </a>
+        </div>
+      </div>
+
+      
+      <div class="dt-autograph__visual" aria-hidden="true">
+        <img
+          src="../assets/media/dt-signatur-2.png"
+          alt=""
+          class="dt-autograph__signature"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== AUTOGRAMM SECTION ===== */
+
+.dt-autograph{
+  padding: clamp(32px, 4vw, 72px) 0;
+  position: relative;
+  background: transparent !important;
+
+  background:
+    radial-gradient(
+      900px 420px at 14% 12%,
+      rgba(255,255,255,.065) 0%,
+      rgba(255,255,255,.035) 28%,
+      rgba(255,255,255,0) 62%
+    );
+}
+
+.dt-autograph__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.dt-autograph__card{
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(20px, 3vw, 36px);
+
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  backdrop-filter: blur(10px);
+}
+
+/* TEXT */
+.dt-autograph__eyebrow{
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 10px;
+}
+
+.dt-autograph__title{
+  font-size: clamp(28px, 2.6vw, 42px);
+  line-height: 1.08;
+  color: rgba(255,255,255,.92);
+  margin-bottom: 14px;
+}
+
+.dt-autograph__lead{
+  color: rgba(255,255,255,.70);
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 64ch;
+  margin-bottom: 16px;
+}
+
+/* ADDRESS CARD */
+.dt-autograph__address{
+  position: relative;
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.22);
+  cursor: pointer;
+  outline: none;
+}
+
+/* HIDDEN STATE */
+.dt-reveal p{
+  filter: blur(10px);
+  opacity: .18;
+  transform: translateY(2px);
+  transition: filter .22s ease, opacity .22s ease, transform .22s ease;
+}
+
+.dt-reveal__hint{
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,.78);
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+
+/* REVEALED */
+.dt-reveal.is-revealed p{
+  filter: blur(0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dt-reveal.is-revealed .dt-reveal__hint{
+  opacity: 0;
+}
+
+.dt-autograph__name{
+  font-weight: 600;
+  color: rgba(255,255,255,.92);
+  margin-bottom: 6px;
+}
+
+/* NOTE */
+.dt-autograph__note{
+  margin-top: 16px;
+  color: rgba(255,255,255,.60);
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 72ch;
+}
+
+/* BUTTONS */
+.dt-autograph__actions{
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.dt-autograph__btn{
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s ease;
+}
+
+.dt-autograph__btn--primary{
+  background: rgba(255,255,255,.92);
+  color: rgba(0,0,0,.92)!important;
+}
+
+.dt-autograph__btn--ghost{
+  border: 1px solid rgba(255,255,255,.16);
+  color: rgba(255,255,255,.88);
+}
+
+.dt-autograph__btn:hover{
+  transform: translateY(-1px);
+}
+
+/* SIGNATURE */
+.dt-autograph__visual{
+  display: grid;
+  place-items: center;
+}
+
+.dt-autograph__signature{
+  width: min(420px, 100%);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 40px rgba(0,0,0,.55));
+  border-radius: 0 !important;
+}
+
+/* reset spacing inside address */
+.dt-autograph__address p{
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* gezielter Abstand nur nach dem Namen */
+.dt-autograph__name{
+  margin-bottom: 6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .dt-autograph__card{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px){
+  .dt-autograph__btn{
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+/* ===== Address Reveal Toggle ===== */
+(function(){
+  document.querySelectorAll('[data-reveal]').forEach(el => {
+    const toggle = () => {
+      const isOpen = el.classList.toggle('is-revealed');
+      el.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    el.addEventListener('click', toggle);
+    el.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
+    });
+  });
+})();
+</script>
+
+<footer class="dt-footer" aria-label="Footer">
+  <div class="dt-footer__wrap">
+    <a class="dt-footer__logo" href="/en/" aria-label="Home">
+      <img src="../assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="lazy" decoding="async" />
+    </a>
+
+    <nav class="dt-footer__links" aria-label="Footer navigation">
+      <a href="/en/imprint/">Imprint</a>
+      <a href="/en/privacy-policy/">Privacy</a>
+      <a href="/en/contact/">Contact</a>
+    </nav>
+
+    <div class="dt-footer__social" aria-label="Social Media">
+      <a href="https://www.facebook.com/1.Dominic.Thiem/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.1h2.7l.4-3.2h-3.1V7.7c0-.9.2-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2v2.4H8v3.2h2.7V21h2.8z"/></svg>
+      </a>
+      <a href="https://x.com/domithiem" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3h2.9l-6.4 7.4L23 21h-6l-4.7-6.2L6.9 21H4l6.9-7.9L1.4 3h6.1l4.2 5.6L18.9 3zm-1 16.3h1.6L6.6 4.6H4.9l13 14.7z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/c/dominicthiem" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.5-.4-5.2c-.2-1-.9-1.7-1.9-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.7.5c-1 .3-1.7 1-1.9 2C1 8.5 1 12 1 12s0 3.5.4 5.2c.2 1 .9 1.7 1.9 2 1.8.5 8.7.5 8.7.5s6.9 0 8.7-.5c1-.3 1.7-1 1.9-2 .4-1.7.4-5.2.4-5.2zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/domithiem/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 2C5.7 4 4 5.7 4 7.8v8.4c0 2.1 1.7 3.8 3.8 3.8h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8c0-2.1-1.7-3.8-3.8-3.8H7.8zm8.9 1.5a1.3 1.3 0 110 2.6 1.3 1.3 0 010-2.6zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/dominic-thiem-03a46a291/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.9-2 3.9-2 4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* dt-nav-scroll-init */
+(() => {
+  const nav = document.querySelector(".dt-nav");
+  if (!nav) return;
+  const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+})();
+</script>
+
+<script src="../assets/js/mobile-nav.js" defer></script>
+</body>
+</html>

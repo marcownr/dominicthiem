@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/jpeg" href="../../assets/media/dt-favicon.jpg" />
+  <link rel="shortcut icon" href="../../assets/media/dt-favicon.jpg" />
+  <title>Partner – Dominic Thiem</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #171717;
+      color: #fff;
+      font-family: var(--dt-font-primary);
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; }
+  </style>
+<style>
+.dt-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+}
+
+.dt-nav.is-scrolled{
+  background: rgba(23,23,23,.96);
+  border-bottom-color: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dt-nav__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dt-nav__logo{ display: inline-flex; align-items: center; }
+.dt-nav__logo img{
+  width: 86px;
+  height: auto;
+  display: block;
+  border-radius: 0 !important;
+}
+
+.dt-nav__menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.dt-nav__menu > li{ position: relative; }
+
+.dt-nav__link,
+.dt-nav__trigger,
+.dt-nav__lang{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .18s ease, opacity .18s ease;
+}
+
+.dt-nav__lang.is-active{
+  opacity: .45;
+  cursor: default;
+  pointer-events: none;
+  border-bottom-color: transparent !important;
+}
+
+.dt-nav__lang{ opacity: .9; }
+
+.dt-nav__link:hover,
+.dt-nav__trigger:hover,
+.dt-nav__lang:hover,
+.dt-nav__link.is-active,
+.dt-nav__trigger.is-active{
+  border-bottom-color: rgba(255,255,255,.92);
+}
+
+.dt-nav__arrow{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 7px;
+  border-right: 2px solid rgba(255,255,255,.96);
+  border-bottom: 2px solid rgba(255,255,255,.96);
+  transform: translateY(-2px) rotate(45deg);
+  opacity: .98;
+}
+
+.dt-nav__dropdown{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 272px;
+  width: max-content;
+  padding: 8px 0;
+  background: rgba(23,23,23,.98);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  display: grid;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+}
+
+.dt-nav__item--projects:hover .dt-nav__dropdown,
+.dt-nav__item--projects:focus-within .dt-nav__dropdown{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dt-nav__dropdown a{
+  color: rgba(255,255,255,.94);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: block;
+  white-space: nowrap;
+  font-weight: 400;
+  opacity: .92;
+  transition: background .16s ease, opacity .16s ease;
+}
+
+.dt-nav__dropdown a:hover{
+  opacity: 1;
+  background: rgba(255,255,255,.08);
+}
+
+@media (max-width: 1280px){
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+  
+}
+
+@media (max-width: 960px){
+  .dt-nav__wrap{
+    width: min(1120px, calc(100% - 28px));
+    min-height: 84px;
+    align-items: flex-start;
+    padding-top: 18px;
+    flex-direction: column;
+  }
+
+  .dt-nav__logo img{ width: 72px; }
+
+  .dt-nav__menu{
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+
+  .dt-nav__dropdown{
+    position: static;
+    min-width: 0;
+    padding-top: 2px;
+    transform: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dt-nav__item--projects:hover .dt-nav__dropdown,
+  .dt-nav__item--projects:focus-within .dt-nav__dropdown{
+    display: grid;
+  }
+
+  
+}
+</style>
+
+<style>
+.dt-footer{
+  margin-top: 80px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #171717;
+}
+
+.dt-footer__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 140px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.dt-footer__logo{
+  display: inline-flex;
+  align-items: center;
+}
+
+.dt-footer__logo img{
+  width: 86px !important;
+  max-width: 86px !important;
+  min-width: 86px !important;
+  height: auto !important;
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 0 !important;
+}
+
+.dt-footer__links{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.dt-footer__links a{
+  color: rgba(255,255,255,.88);
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: .01em;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__links a:hover,
+.dt-footer__social a:hover{
+  opacity: .7;
+}
+
+.dt-footer__social{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dt-footer__social a{
+  width: 34px;
+  height: 34px;
+  color: #fff !important;
+  opacity: .92;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__social svg{
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  fill: currentColor !important;
+  opacity: 1;
+}
+
+@media (max-width: 1100px){
+  .dt-footer__wrap{
+    width: min(1120px, calc(100% - 28px));
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 26px 0;
+    gap: 20px;
+  }
+
+  .dt-footer__links{
+    gap: 28px;
+  }
+
+  .dt-footer__links a{
+    font-size: 16px;
+}
+}
+</style>
+
+<style id="dt-brand-theme">
+:root{
+  --dt-primary:#00f3ff;
+  --dt-secondary:#ffffff;
+  --dt-accent:#00f3ff;
+  --dt-font-primary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-font-secondary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-weight-primary:400;
+  --dt-weight-secondary:400;
+  --dt-weight-text:400;
+  --dt-weight-accent:500;
+}
+html,body{ color:var(--dt-secondary); text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+html{ -webkit-font-smoothing: antialiased; }
+body{ font-family: var(--dt-font-primary); font-weight:var(--dt-weight-text); }
+p{ font-family: var(--dt-font-primary); font-weight:400; }
+h1,h2,h3,h4,h5,h6{ font-weight:var(--dt-weight-primary); }
+strong,b{ font-weight:var(--dt-weight-accent); }
+.dt-accent,[data-accent="true"]{ color:var(--dt-accent); font-weight:var(--dt-weight-accent); }
+
+/* remove glow effects globally */
+.dt-page::before,
+.dt-projects::before,
+.dt-bioCV::before,
+.dt-partners::before,
+.dt-store::before,
+.dt-autograph::before,
+.dt-umbrella::before{
+  content:none !important;
+  background:none !important;
+}
+
+.dt-page,
+.dt-projects,
+.dt-bioCV,
+.dt-partners,
+.dt-store,
+.dt-autograph,
+.dt-umbrella{
+  background:transparent !important;
+}
+</style>
+
+<link rel="stylesheet" href="../../assets/css/mobile-nav.css">
+</head>
+<body>
+
+<nav class="dt-nav" aria-label="Main navigation">
+  <div class="dt-nav__wrap">
+    <a class="dt-nav__logo" href="/en/" aria-label="Home">
+      <img src="../../assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="eager" decoding="async" />
+    </a>
+
+    <ul class="dt-nav__menu">
+      <li><a class="dt-nav__link" href="/en/about/">About</a></li>
+
+      <li class="dt-nav__item--projects">
+        <a class="dt-nav__trigger" href="/en/projekte/">Projects <span class="dt-nav__arrow" aria-hidden="true"></span></a>
+        <div class="dt-nav__dropdown" aria-label="Projects submenu">
+          <a href="projekte/thiem-energy.html">THIEM ENERGY</a>
+          <a href="projekte/thiem-view.html">THIEM VIEW</a>
+          <a href="projekte/thiem-academy-burgenland.html">THIEM ACADEMY</a>
+        </div>
+      </li>
+
+      <li><a class="dt-nav__link is-active" href="/en/partner/">Partner</a></li>
+      <li><a class="dt-nav__link" href="/en/investments/">Investments</a></li>
+      <li><a class="dt-nav__link" href="https://shop.dominicthiem.com/" target="_blank" rel="noopener noreferrer">Shop</a></li>
+      <li><a class="dt-nav__lang" href="/partner/" aria-label="Language German">DE</a></li>
+      <li><a class="dt-nav__lang is-active" href="#" aria-label="Language English" aria-current="true">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="dtp-hero" aria-label="Partner Hero">
+  <div class="dtp-hero__media" role="img" aria-label="Partner Visual"></div>
+
+  <div class="dtp-hero__wrap">
+    <div class="dtp-hero__content">
+      <p class="dtp-hero__eyebrow">PARTNERS</p>
+
+      <h1 class="dtp-hero__title">
+        Partners are the visible expression<br />
+        of my values.
+      </h1>
+
+      <p class="dtp-hero__sub">
+        Every partnership reflects a shared mindset.<br />
+        Dominic Thiem works exclusively with brands that align with his values, his vision, and his sense of responsibility.<br />
+      </p>
+
+      <div class="dtp-hero__meta" aria-label="Meta">
+        <div class="dtp-hero__metaItem">
+          <span class="dtp-hero__metaLabel">Focus</span>
+          <span class="dtp-hero__metaValue">Innovation · Sustainability · Health · Sport · Community</span>
+        </div>
+      </div>
+    </div>
+
+    <a class="dtp-hero__scroll" href="#content" aria-label="Scroll to content">
+      <span class="dtp-hero__scrollLine"></span>
+      <span class="dtp-hero__scrollText">Scroll</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* ===== PARTNER HERO (Standalone) ===== */
+  .dtp-hero{
+    --dtp-text: rgba(255,255,255,.92);
+    --dtp-muted: rgba(255,255,255,.70);
+    --dtp-soft: rgba(255,255,255,.52);
+    --dtp-border: rgba(255,255,255,.12);
+    --dtp-radius: 22px;
+
+    position: relative;
+    min-height: clamp(640px, 95vh, 900px);
+    overflow: hidden;
+    background: #171717;
+  }
+
+  .dtp-hero__media{
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg,
+        rgba(0,0,0,.82) 0%,
+        rgba(0,0,0,.58) 26%,
+        rgba(0,0,0,.32) 46%,
+        rgba(0,0,0,.10) 70%,
+        rgba(0,0,0,0) 100%
+      ),
+      radial-gradient(1200px 520px at 18% 12%,
+        rgba(255,255,255,.08) 0%,
+        rgba(255,255,255,0) 60%
+      ),
+      url("../../assets/media/dominic-thiem-hero-main.jpg");
+    background-size: cover;
+    background-position: center 20%;
+    transform: scale(1.02);
+    filter: saturate(.95) contrast(1.02);
+  }
+
+  .dtp-hero::after{
+    content:"";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(900px 420px at 15% 35%,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.35) 70%,
+      rgba(0,0,0,.62) 100%
+    );
+    opacity: .70;
+  }
+
+  .dtp-hero__wrap{
+    position: relative;
+    z-index: 2;
+    width: min(1160px, calc(100% - 48px));
+    margin: 0 auto;
+    height: 100%;
+    min-height: inherit;
+    display: grid;
+    align-items: center;
+    padding: clamp(92px, 12vh, 140px) 0 clamp(28px, 5vh, 52px);
+  }
+
+  .dtp-hero__content{ max-width: 660px; }
+
+  .dtp-hero__eyebrow{
+    margin: 0 0 12px 0;
+    color: rgba(255,255,255,.72);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+
+  .dtp-hero__title{
+    margin: 0 0 14px 0;
+    color: var(--dtp-text);
+    font-weight: 500;
+    line-height: 1.03;
+    font-size: clamp(34px, 4.1vw, 64px);
+    text-wrap: balance;
+  }
+
+  .dtp-hero__sub{
+    margin: 0;
+    color: var(--dtp-muted);
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.7;
+    max-width: 72ch;
+  }
+
+  .dtp-hero__pillars{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .dtp-hero__chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.22);
+    color: rgba(255,255,255,.70);
+    font-size: 13px;
+    line-height: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .dtp-hero__chip strong{
+    font-weight: 850;
+    color: rgba(255,255,255,.95);
+    text-decoration: underline;
+    text-underline-offset: .18em;
+    text-decoration-thickness: .12em;
+  }
+
+  .dtp-hero__actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .dtp-hero__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    padding: 0 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: .02em;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    will-change: transform;
+    white-space: nowrap;
+  font-weight: 400;
+  }
+
+  .dtp-hero__btn--primary{
+    background: rgba(255,255,255,.92);
+    color: rgba(0,0,0,.92) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+  }
+
+  .dtp-hero__btn--ghost{
+    background: transparent;
+    color: rgba(255,255,255,.88);
+    border: 1px solid rgba(255,255,255,.18);
+  }
+
+  .dtp-hero__btn:hover{ transform: translateY(-1px); }
+  .dtp-hero__btn--ghost:hover{
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.26);
+  }
+
+  .dtp-hero__meta{
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    display: grid;
+    gap: 10px;
+    max-width: 560px;
+  }
+
+  .dtp-hero__metaItem{ display: grid; gap: 3px; }
+
+  .dtp-hero__metaLabel{
+    color: rgba(255,255,255,.46);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .dtp-hero__metaValue{
+    color: rgba(255,255,255,.82);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .dtp-hero__scroll{
+    position: absolute;
+    right: 0;
+    bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.62);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 10px 0 10px 12px;
+  }
+
+  .dtp-hero__scrollLine{
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,.34);
+    display: inline-block;
+    transform-origin: left;
+    animation: dtp-scroll 1.6s ease-in-out infinite;
+  }
+
+  @keyframes dtp-scroll{
+    0%, 100%{ transform: scaleX(.55); opacity: .6; }
+    50%{ transform: scaleX(1); opacity: 1; }
+  }
+
+  @media (max-width: 860px){
+    .dtp-hero__wrap{ padding: 96px 0 38px; }
+    .dtp-hero__content{ max-width: 720px; }
+    .dtp-hero__scroll{ right: auto; left: 0; }
+  }
+
+  @media (max-width: 560px){
+    .dtp-hero__actions .dtp-hero__btn{ width: 100%; }
+    .dtp-hero__media{ background-position: center 12%; }
+    .dtp-hero__sub br{ display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dtp-hero__btn{ transition: none; }
+    .dtp-hero__btn:hover{ transform: none; }
+    .dtp-hero__scrollLine{ animation: none; }
+  }
+</style>
+
+<section class="dtp-partnerList" id="content" aria-label="Selected Partners">
+  <div class="dtp-partnerList__wrap">
+    <div class="dtp-partnerGrid" role="list">
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Adidas" data-img="../../assets/media/adidas-background.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true">
+              <img src="../../assets/media/adidas-logo-new.png" alt="Adidas" loading="lazy" decoding="async"/>
+            </div>
+            <div class="dtp-partnerCard__titleBlock">
+              <h3 class="dtp-partnerCard__name">Adidas</h3>
+              <p class="dtp-partnerCard__since">since 2011</p>
+            </div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars">
+            <span class="dtp-partnerCard__pill">Performance</span>
+            <span class="dtp-partnerCard__pill">Loyalty</span>
+          </div>
+        </div>
+        <p class="dtp-partnerCard__copy">Adidas stands for reliability, performance, and a shared history. The partnership is built on authenticity and loyalty: a global sportswear leader and an Austrian champion, connected by values and continuity.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://adidas.com" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Babolat" data-img="../../assets/media/babolat-background-scaled.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/babolat-logo.png" alt="Babolat" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">Babolat</h3><p class="dtp-partnerCard__since">since 2015</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Tennis</span><span class="dtp-partnerCard__pill">Tradition</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">From his earliest days on court, Babolat has accompanied Dominic as an equipment partner and trusted performance companion. The collaboration is part of his tennis identity - defined by tradition, quality, and mutual trust.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://babolat.com" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Biogena One World Foundation" data-img="../../assets/media/biogena-background-scaled.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/bowf-logo-white-1.png" alt="Biogena" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">Biogena One World Foundation</h3><p class="dtp-partnerCard__since">One Health · One World</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Health</span><span class="dtp-partnerCard__pill">Sustainability</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">An internationally active foundation focused on health, sustainability, and global responsibility. Guided by the principle "One Health. One World. One Future.", it connects physical, mental, and planetary health through a holistic approach. Dominic Thiem serves as the face and ambassador of the foundation, lending credibility, international reach, and a clear stance: taking responsibility - for oneself, for others, and for the planet.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://biogena.com" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Bitpanda" data-img="../../assets/media/bitpanda-background.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/bitpanda-logo-white.png" alt="Bitpanda" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">Bitpanda</h3><p class="dtp-partnerCard__since">Innovation Partner</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Innovation</span><span class="dtp-partnerCard__pill">Future</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">A modern partner representing innovation, new technologies, and financial self-determination. Dominic stands for future thinking, digital responsibility, and lifestyle relevance.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://bitpanda.com" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="BMW" data-img="../../assets/media/bmw-background-scaled.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/bmw-logo-white.png" alt="BMW" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">BMW</h3><p class="dtp-partnerCard__since">E-Line Ambassador</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Technology</span><span class="dtp-partnerCard__pill">Mobility</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">Dominic is Ambassador for the BMW E-Line - the intersection of technology, sustainability, and modern mobility. BMW combines lifestyle, innovation, and a clear commitment to an emission-free future. Dominic represents a new generation of responsible mobility.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://bmw.com" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="ELK" data-img="../../assets/media/elk-background.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/elk-logo-white.png" alt="ELK" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">ELK</h3><p class="dtp-partnerCard__since">Sustainability</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Housing</span><span class="dtp-partnerCard__pill">Energy</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">ELK, Thiem Energy, and Dominic form a triangle of sustainability. Regional strength, sustainable housing, and future energy systems come together. Dominic is the face of conscious building and responsible living.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://elk.at" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Red Bull" data-img="../../assets/media/redbull-background.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/rb-standard-logo-mono-neg-2017.png" alt="Red Bull" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">Red Bull</h3><p class="dtp-partnerCard__since">since 2018</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Sport</span><span class="dtp-partnerCard__pill">Trust</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">A partnership defined by trust, support, and shared success. Red Bull has accompanied Dominic through all phases of his career. An Austrian success story built on energy, sporting passion, and a shared vision for the future.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://redbull.com" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Red Bull Mobile" data-img="../../assets/media/redbull-mobile-background.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/red-bull-mobile-logo.png" alt="Red Bull Mobile" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">Red Bull Mobile</h3><p class="dtp-partnerCard__since">Lifestyle &amp; Digital</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Lifestyle</span><span class="dtp-partnerCard__pill">Digital</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">Closely connected to the Red Bull ecosystem, with a focus on lifestyle, telecommunications, and digital freedom. Red Bull Mobile enables connected mobility - aligned with Dominic's lifestyle between sport, travel, and entrepreneurship.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://www.redbullmobile.at/" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Samsung" data-img="../../assets/media/samsung-background.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/samsung-wordmark-white.png" alt="Samsung" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">Samsung</h3><p class="dtp-partnerCard__since">Technology &amp; Digital</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Technology</span><span class="dtp-partnerCard__pill">Digital</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">Samsung combines technological excellence with a strong spirit of innovation. The partnership is built on a shared ambition to approach performance and health holistically - smart, precise, and future-oriented.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://www.samsung.com/" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+      <article class="dtp-partnerCard dtp-partnerCard--collapsible" role="listitem" aria-label="Sportland Burgenland" data-img="../../assets/media/sport-bugenland-background-scaled.jpg">
+        <div class="dtp-partnerCard__media dtp-partnerCard__media--collapsible" aria-hidden="true"></div>
+        <div class="dtp-partnerCard__top">
+          <div class="dtp-partnerCard__brand">
+            <div class="dtp-partnerCard__logo" aria-hidden="true"><img src="../../assets/media/sportland-burgenland-logo-white.png" alt="Sportland Burgenland" loading="lazy" decoding="async"/></div>
+            <div class="dtp-partnerCard__titleBlock"><h3 class="dtp-partnerCard__name">Sportland Burgenland</h3><p class="dtp-partnerCard__since">Regional Partner</p></div>
+          </div>
+          <div class="dtp-partnerCard__pillars" aria-label="Pillars"><span class="dtp-partnerCard__pill">Youth Development</span><span class="dtp-partnerCard__pill">Performance</span></div>
+        </div>
+        <p class="dtp-partnerCard__copy">A strong regional partner closely linked to the Thiem Academy Burgenland. The partnership stands for youth development, performance culture, and strengthening sport within the region and beyond.</p>
+        <div class="dtp-partnerCard__actions"><a class="dtp-partnerCard__link" href="https://www.burgenland.at/themen/sport/" target="_blank" rel="noopener">Visit website</a></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ===== Partner List (Standalone, DT look) ===== */
+  .dtp-partnerList{
+    --dtp-text: rgba(255,255,255,.90);
+    --dtp-muted: rgba(255,255,255,.68);
+    --dtp-soft: rgba(255,255,255,.52);
+    --dtp-border: rgba(255,255,255,.10);
+    --dtp-radius: 22px;
+
+    min-height: 100vh;
+    padding: clamp(44px, 7vh, 110px) 0;
+    position: relative;
+    background: transparent;
+  }
+
+  .dtp-partnerList *{ box-sizing: border-box; }
+
+  .dtp-partnerList__wrap{ width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+
+  .dtp-partnerGrid{ display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 18px; }
+
+  .dtp-partnerCard{
+    border: 1px solid var(--dtp-border);
+    border-radius: calc(var(--dtp-radius) + 6px);
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+    box-shadow: 0 18px 50px rgba(0,0,0,.20);
+    transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .dtp-partnerCard:hover{
+    transform: translateY(-1px);
+    border-color: rgba(255,255,255,.18);
+    background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+  }
+
+  .dtp-partnerCard__media--collapsible{
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    margin: 0 12px 0 12px;
+    border-top-left-radius: calc(var(--dtp-radius) + 6px);
+    border-top-right-radius: calc(var(--dtp-radius) + 6px);
+    background-size: cover;
+    background-position: center 40%;
+    filter: saturate(.92) contrast(.96);
+    transition: height .32s cubic-bezier(.4,0,.2,1), margin .32s cubic-bezier(.4,0,.2,1);
+  font-weight: 400;
+  }
+
+  .dtp-partnerCard__media--collapsible::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(720px 260px at 18% 18%, rgba(255,255,255,.10), rgba(255,255,255,0) 60%), linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.78));
+    opacity: .92;
+  }
+
+  .dtp-partnerCard.is-open .dtp-partnerCard__media--collapsible{
+    height: clamp(260px, 28vw, 380px);
+    margin: 12px 12px 0 12px;
+  }
+
+  .dtp-partnerCard--collapsible{ cursor: pointer; }
+  .dtp-partnerCard a{ cursor: pointer; }
+
+  .dtp-partnerCard__top,
+  .dtp-partnerCard__copy,
+  .dtp-partnerCard__actions{ padding-left: 18px; padding-right: 18px; }
+
+  .dtp-partnerCard__top{ padding-top: 18px; display: grid; gap: 18px; }
+  .dtp-partnerCard__actions{ padding-bottom: 18px; margin-top: 2px; }
+
+  .dtp-partnerCard__brand{ display: flex; align-items: center; justify-content: flex-start; gap: 14px; }
+
+  .dtp-partnerCard__logo{ flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: flex-start; height: 34px; }
+
+  .dtp-partnerCard__logo img{
+    height: 34px;
+    width: auto;
+    max-width: 190px;
+    object-fit: contain;
+    object-position: left center;
+    border-radius: 0 !important;
+    opacity: .92;
+    display: block;
+  }
+
+  .dtp-partnerCard__titleBlock{ display: grid; gap: 4px; text-align: left; min-width: 0; }
+
+  .dtp-partnerCard__name{ margin: 0; color: rgba(255,255,255,.92); font-weight: 520; font-size: 18px; letter-spacing: .01em; }
+
+  .dtp-partnerCard__since{ margin: 0; color: rgba(255,255,255,.55); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+
+  .dtp-partnerCard__pillars{ display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .dtp-partnerCard__pill{
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.22);
+    color: rgba(255,255,255,.70);
+    font-size: 12.5px;
+    line-height: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    white-space: nowrap;
+  }
+
+  .dtp-partnerCard__copy{ margin: 0; color: rgba(255,255,255,.70); font-size: 14px; line-height: 1.75; max-width: 78ch; }
+
+  .dtp-partnerCard__actions{ display: flex; justify-content: flex-start; }
+
+  .dtp-partnerCard__link{
+    color: rgba(255,255,255,.88);
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+    letter-spacing: .02em;
+    transition: opacity .18s ease;
+  }
+  .dtp-partnerCard__link:hover{ opacity: .65; }
+
+  @media (max-width: 920px){
+    .dtp-partnerList__wrap{ width: min(1120px, calc(100% - 36px)); }
+    .dtp-partnerCard{ max-width: 100%; }
+  }
+
+  @media (max-width: 520px){
+    .dtp-partnerList__wrap{ width: min(1120px, calc(100% - 28px)); }
+    .dtp-partnerCard__top,
+    .dtp-partnerCard__copy,
+    .dtp-partnerCard__actions{ padding-left: 16px; padding-right: 16px; }
+    .dtp-partnerCard__top{ padding-top: 16px; }
+    .dtp-partnerCard.is-open .dtp-partnerCard__media--collapsible{ height: 240px; margin: 10px 10px 0 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dtp-partnerCard,
+    .dtp-partnerCard__media--collapsible,
+    .dtp-partnerCard__link{ transition: none; }
+    .dtp-partnerCard:hover{ transform: none; }
+  }
+
+  .dtp-partnerCard[aria-label="Babolat"] .dtp-partnerCard__logo img{ height: 24px; }
+  .dtp-partnerCard[aria-label="Bitpanda"] .dtp-partnerCard__logo img{ height: 27px; }
+  .dtp-partnerCard[aria-label="ELK"] .dtp-partnerCard__logo img{ height: 36px; }
+  .dtp-partnerCard[aria-label="BMW"] .dtp-partnerCard__logo img{ height: 42px; }
+  .dtp-partnerCard[aria-label="Red Bull Mobile"] .dtp-partnerCard__logo img{ height: 26px; }
+  .dtp-partnerCard[aria-label="Samsung"] .dtp-partnerCard__logo img{ height: 28px; max-width: 150px; }
+  .dtp-partnerCard[aria-label="Adidas"] .dtp-partnerCard__media--collapsible{ background-position: center top !important; }
+  .dtp-partnerCard[aria-label="Red Bull"] .dtp-partnerCard__media--collapsible{ background-position: center top !important; }
+</style>
+
+<section class="dtp-partnerCta" aria-label="Become a Partner">
+  <div class="dtp-partnerCta__wrap">
+    <div class="dtp-partnerCta__card">
+
+      <div class="dtp-partnerCta__content">
+        <p class="dtp-partnerCta__eyebrow">Partner</p>
+        <h3 class="dtp-partnerCta__title">Become a Partner</h3>
+
+        <p class="dtp-partnerCta__copy">
+          Want to become part of the partner ecosystem?
+          We evaluate requests by clear criteria: brand fit, shared values,
+          substance over campaign, and long-term ambition.
+        </p>
+
+        <div class="dtp-partnerCard__pillars" aria-label="Pillars">
+          <span class="dtp-partnerCard__pill">Innovation</span>
+          <span class="dtp-partnerCard__pill">Sustainability</span>
+          <span class="dtp-partnerCard__pill">Health</span>
+          <span class="dtp-partnerCard__pill">Sport</span>
+          <span class="dtp-partnerCard__pill">Community</span>
+        </div>
+
+        <div class="dtp-partnerCta__actions">
+          <a class="dtp-partnerCta__btn dtp-partnerCta__btn--primary" href="/kontakt" aria-label="Send partner request">Partner request</a>
+        </div>
+      </div>
+
+      <div class="dtp-partnerCta__imageWrap" aria-hidden="true">
+        <img src="../../assets/media/chiara-milo-bild.jpg" alt="" loading="lazy" decoding="async" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== PARTNER CTA 50/50 ===== */
+
+.dtp-partnerCta{ padding: clamp(40px, 6vh, 96px) 0; }
+
+.dtp-partnerCta__wrap{ width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+
+.dtp-partnerCta__card{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 26px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 24px 70px rgba(0,0,0,.30);
+}
+
+.dtp-partnerCta__content{ padding: clamp(20px, 3vw, 34px); display: grid; align-content: center; gap: 14px; }
+
+.dtp-partnerCta__eyebrow{ margin: 0; color: rgba(255,255,255,.52); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+
+.dtp-partnerCta__title{ margin: 0; color: rgba(255,255,255,.92); font-size: clamp(22px, 2.2vw, 34px); font-weight: 500; line-height: 1.1; }
+
+.dtp-partnerCta__copy{ margin: 0; color: rgba(255,255,255,.68); font-size: 15px; line-height: 1.7; max-width: 48ch; }
+
+.dtp-partnerCta__actions{ margin-top: 8px; }
+
+.dtp-partnerCard__pillars{ display: flex; flex-wrap: wrap; gap: 10px; }
+
+.dtp-partnerCta__btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  color: rgba(0,0,0,.92)!important;
+  border: 1px solid rgba(255,255,255,.12);
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform .15s ease;
+}
+
+.dtp-partnerCta__btn:hover{ transform: translateY(-1px); }
+
+.dtp-partnerCta__imageWrap{ position: relative; overflow: hidden; }
+
+.dtp-partnerCta__imageWrap img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1) contrast(1.05) brightness(.85);
+  transform: scale(1.03);
+}
+
+.dtp-partnerCta__imageWrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(520px 260px at 20% 20%, rgba(255,255,255,.18), rgba(255,255,255,0) 60%), linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.55));
+}
+
+@media (max-width: 900px){
+  .dtp-partnerCta__card{ grid-template-columns: 1fr; }
+  .dtp-partnerCta__imageWrap{ min-height: 260px; }
+}
+
+@media (min-width: 901px){
+  .dtp-partnerCta__imageWrap{ order: 1; }
+  .dtp-partnerCta__content{ order: 2; }
+}
+</style>
+
+<script>
+  (function(){
+    const cards = Array.from(document.querySelectorAll('.dtp-partnerCard--collapsible'));
+    if(!cards.length) return;
+
+    cards.forEach(card => {
+      const media = card.querySelector('.dtp-partnerCard__media--collapsible');
+      const img = card.dataset.img;
+      if(media && img){
+        media.style.backgroundImage = `url("${img}")`;
+        media.style.backgroundSize = 'cover';
+        media.style.backgroundPosition = 'center 40%';
+      }
+    });
+
+    function closeAll(){
+      cards.forEach(c => {
+        c.classList.remove('is-open');
+        const m = c.querySelector('.dtp-partnerCard__media--collapsible');
+        if(m) m.setAttribute('aria-hidden', 'true');
+      });
+    }
+
+    function openCard(card){
+      const media = card.querySelector('.dtp-partnerCard__media--collapsible');
+      card.classList.add('is-open');
+      if(media) media.setAttribute('aria-hidden', 'false');
+    }
+
+    closeAll();
+    openCard(cards[0]);
+
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        if(e.target.closest('a')) return;
+
+        const isOpen = card.classList.contains('is-open');
+        closeAll();
+        if(!isOpen) openCard(card);
+      });
+    });
+  })();
+</script>
+
+<footer class="dt-footer" aria-label="Footer">
+  <div class="dt-footer__wrap">
+    <a class="dt-footer__logo" href="/en/" aria-label="Home">
+      <img src="../../assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="lazy" decoding="async" />
+    </a>
+
+    <nav class="dt-footer__links" aria-label="Footer navigation">
+      <a href="/en/imprint/">Imprint</a>
+      <a href="/en/privacy-policy/">Privacy</a>
+      <a href="/en/contact/">Contact</a>
+    </nav>
+
+    <div class="dt-footer__social" aria-label="Social Media">
+      <a href="https://www.facebook.com/1.Dominic.Thiem/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.1h2.7l.4-3.2h-3.1V7.7c0-.9.2-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2v2.4H8v3.2h2.7V21h2.8z"/></svg>
+      </a>
+      <a href="https://x.com/domithiem" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3h2.9l-6.4 7.4L23 21h-6l-4.7-6.2L6.9 21H4l6.9-7.9L1.4 3h6.1l4.2 5.6L18.9 3zm-1 16.3h1.6L6.6 4.6H4.9l13 14.7z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/c/dominicthiem" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.5-.4-5.2c-.2-1-.9-1.7-1.9-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.7.5c-1 .3-1.7 1-1.9 2C1 8.5 1 12 1 12s0 3.5.4 5.2c.2 1 .9 1.7 1.9 2 1.8.5 8.7.5 8.7.5s6.9 0 8.7-.5c1-.3 1.7-1 1.9-2 .4-1.7.4-5.2.4-5.2zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/domithiem/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 2C5.7 4 4 5.7 4 7.8v8.4c0 2.1 1.7 3.8 3.8 3.8h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8c0-2.1-1.7-3.8-3.8-3.8H7.8zm8.9 1.5a1.3 1.3 0 110 2.6 1.3 1.3 0 010-2.6zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/dominic-thiem-03a46a291/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.9-2 3.9-2 4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* dt-nav-scroll-init */
+(() => {
+  const nav = document.querySelector(".dt-nav");
+  if (!nav) return;
+  const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+})();
+</script>
+
+<script src="../../assets/js/mobile-nav.js" defer></script>
+</body>
+</html>

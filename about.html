@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/jpeg" href="assets/media/dt-favicon.jpg" />
+  <link rel="shortcut icon" href="assets/media/dt-favicon.jpg" />
+  <title>About — Dominic Thiem</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #171717;
+      color: #fff;
+      font-family: var(--dt-font-primary);
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; }
+  
+</style>
+<style>
+.dt-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+}
+
+.dt-nav.is-scrolled{
+  background: rgba(23,23,23,.96);
+  border-bottom-color: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dt-nav__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dt-nav__logo{ display: inline-flex; align-items: center; }
+.dt-nav__logo img{
+  width: 86px;
+  height: auto;
+  display: block;
+  border-radius: 0 !important;
+}
+
+.dt-nav__menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.dt-nav__menu > li{ position: relative; }
+
+.dt-nav__link,
+.dt-nav__trigger,
+.dt-nav__lang{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .18s ease, opacity .18s ease;
+}
+
+.dt-nav__lang.is-active{
+  opacity: .45;
+  cursor: default;
+  pointer-events: none;
+  border-bottom-color: transparent !important;
+}
+
+.dt-nav__lang{ opacity: .9; }
+
+.dt-nav__link:hover,
+.dt-nav__trigger:hover,
+.dt-nav__lang:hover,
+.dt-nav__link.is-active,
+.dt-nav__trigger.is-active{
+  border-bottom-color: rgba(255,255,255,.92);
+}
+
+.dt-nav__arrow{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 7px;
+  border-right: 2px solid rgba(255,255,255,.96);
+  border-bottom: 2px solid rgba(255,255,255,.96);
+  transform: translateY(-2px) rotate(45deg);
+  opacity: .98;
+}
+
+.dt-nav__dropdown{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 272px;
+  width: max-content;
+  padding: 8px 0;
+  background: rgba(23,23,23,.98);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  display: grid;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+}
+
+.dt-nav__item--projects:hover .dt-nav__dropdown,
+.dt-nav__item--projects:focus-within .dt-nav__dropdown{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dt-nav__dropdown a{
+  color: rgba(255,255,255,.94);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: block;
+  white-space: nowrap;
+  font-weight: 400;
+  opacity: .92;
+  transition: background .16s ease, opacity .16s ease;
+}
+
+.dt-nav__dropdown a:hover{
+  opacity: 1;
+  background: rgba(255,255,255,.08);
+}
+
+@media (max-width: 1280px){
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+  
+}
+
+@media (max-width: 960px){
+  .dt-nav__wrap{
+    width: min(1120px, calc(100% - 28px));
+    min-height: 84px;
+    align-items: flex-start;
+    padding-top: 18px;
+    flex-direction: column;
+  }
+
+  .dt-nav__logo img{ width: 72px; }
+
+  .dt-nav__menu{
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+
+  .dt-nav__dropdown{
+    position: static;
+    min-width: 0;
+    padding-top: 2px;
+    transform: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dt-nav__item--projects:hover .dt-nav__dropdown,
+  .dt-nav__item--projects:focus-within .dt-nav__dropdown{
+    display: grid;
+  }
+
+  
+}
+</style>
+
+<style>
+.dt-footer{
+  margin-top: 80px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #171717;
+}
+
+.dt-footer__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 140px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.dt-footer__logo{
+  display: inline-flex;
+  align-items: center;
+}
+
+.dt-footer__logo img{
+  width: 86px !important;
+  max-width: 86px !important;
+  min-width: 86px !important;
+  height: auto !important;
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 0 !important;
+}
+
+.dt-footer__links{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.dt-footer__links a{
+  color: rgba(255,255,255,.88);
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: .01em;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__links a:hover,
+.dt-footer__social a:hover{
+  opacity: .7;
+}
+
+.dt-footer__social{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dt-footer__social a{
+  width: 34px;
+  height: 34px;
+  color: #fff !important;
+  opacity: .92;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity .18s ease;
+}
+
+.dt-footer__social svg{
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  fill: currentColor !important;
+  opacity: 1;
+}
+
+@media (max-width: 1100px){
+  .dt-footer__wrap{
+    width: min(1120px, calc(100% - 28px));
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 26px 0;
+    gap: 20px;
+  }
+
+  .dt-footer__links{
+    gap: 28px;
+  }
+
+  .dt-footer__links a{
+    font-size: 16px;
+  }
+}
+</style>
+
+<style id="dt-brand-theme">
+:root{
+  --dt-primary:#00f3ff;
+  --dt-secondary:#ffffff;
+  --dt-accent:#00f3ff;
+  --dt-font-primary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-font-secondary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-weight-primary:400;
+  --dt-weight-secondary:400;
+  --dt-weight-text:400;
+  --dt-weight-accent:500;
+}
+html,body{ color:var(--dt-secondary); text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+html{ -webkit-font-smoothing: antialiased; }
+body{ font-family: var(--dt-font-primary); font-weight:var(--dt-weight-text); }
+p{ font-family: var(--dt-font-primary); font-weight:400; }
+h1,h2,h3,h4,h5,h6{ font-weight:var(--dt-weight-primary); }
+strong,b{ font-weight:var(--dt-weight-accent); }
+.dt-accent,[data-accent="true"]{ color:var(--dt-accent); font-weight:var(--dt-weight-accent); }
+
+/* remove glow effects globally */
+.dt-page::before,
+.dt-projects::before,
+.dt-bioCV::before,
+.dt-partners::before,
+.dt-store::before,
+.dt-autograph::before,
+.dt-umbrella::before{
+  content:none !important;
+  background:none !important;
+}
+
+.dt-page,
+.dt-projects,
+.dt-bioCV,
+.dt-partners,
+.dt-store,
+.dt-autograph,
+.dt-umbrella{
+  background:transparent !important;
+}
+</style>
+
+<link rel="stylesheet" href="assets/css/mobile-nav.css">
+</head>
+<body>
+
+<nav class="dt-nav" aria-label="Hauptnavigation">
+  <div class="dt-nav__wrap">
+    <a class="dt-nav__logo" href="index.html" aria-label="Startseite">
+      <img src="assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="eager" decoding="async" />
+    </a>
+
+    <ul class="dt-nav__menu">
+      <li><a class="dt-nav__link is-active" href="about.html">About</a></li>
+
+      <li class="dt-nav__item--projects">
+        <a class="dt-nav__trigger" href="projekte.html">Projekte <span class="dt-nav__arrow" aria-hidden="true"></span></a>
+        <div class="dt-nav__dropdown" aria-label="Projekte Untermenü">
+          <a href="projekte/thiem-energy.html">THIEM ENERGY</a>
+          <a href="projekte/thiem-view.html">THIEM VIEW</a>
+          <a href="projekte/thiem-academy-burgenland.html">THIEM ACADEMY</a>
+        </div>
+      </li>
+
+      <li><a class="dt-nav__link" href="partner.html">Partner</a></li>
+      <li><a class="dt-nav__link" href="investments.html">Investments</a></li>
+      <li><a class="dt-nav__link" href="https://shop.dominicthiem.com/" target="_blank" rel="noopener noreferrer">Shop</a></li>
+      <li><a class="dt-nav__lang is-active" href="#" aria-label="Sprache Deutsch" aria-current="true">DE</a></li>
+      <li><a class="dt-nav__lang" href="/en/about/" aria-label="Language English">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="dt-life" aria-label="Timeline">
+  <div class="dt-life__wrap">
+    <header class="dt-life__head">
+      <p class="dt-life__eyebrow">Timeline</p>
+      <h2 class="dt-life__title">Meilensteine</h2>
+    </header>
+
+    <div class="dt-life__railWrap">
+      <button class="dt-life__nav dt-life__nav--prev" type="button" aria-label="Vorherige Karte">&#8249;</button>
+      <div class="dt-life__rail" id="dtLifeRail">
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-1993-wiener-neustadt.png" alt="1993" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">1993</h3>
+          <p class="dt-life__text">Am 3. September 1993 erblickt Dominic in Wiener Neustadt, etwa 45 Minuten von Wien entfernt, das Licht der Welt.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-1997-first-tennis-racket.png" alt="1997" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">1997</h3>
+          <p class="dt-life__text">1997 nimmt Dominic zum ersten Mal einen Tennisschläger in die Hand. Natürlich konnte damals noch niemand ahnen, dass er eines Tages auf den größten Tennisplätzen der Welt um die bedeutendsten Titel kämpfen würde.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2005-2011-junior-career.jpg" alt="2005-2011" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2005-2011</h3>
+          <p class="dt-life__text">2005-2011 macht sich Dominic bereits in jungen Jahren einen Namen. Er erreicht das Endspiel des Juniorenbewerbs bei Roland Garros und spielt sich bis auf Platz 2 der Junioren-Weltrangliste in der U18-Kategorie vor.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2015-first-atp-title-nice.jpg" alt="2015" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2015</h3>
+          <p class="dt-life__text">2015 ist es endlich soweit: Dominic gewinnt seinen ersten ATP-Titel in Nizza. Dieser Erfolg markiert einen entscheidenden Schritt in Richtung Weltspitze. Es bleibt das einzige Turnier seiner Karriere, das er zweimal hintereinander gewinnen wird.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2018-roland-garros-final.jpg" alt="2018" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2018</h3>
+          <p class="dt-life__text">2018 gehört Dominic bereits zu den besten Tennisspielern der Welt. In diesem Jahr feiert er seinen bis dahin größten Erfolg: Er zieht ins Finale von Roland Garros ein, dem prestigeträchtigsten Sandplatzturnier der Welt. Nur Rafael Nadal, der „König des Sandplatzes“, kann ihn stoppen.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2019-indian-wells-title.jpg" alt="2019" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2019</h3>
+          <p class="dt-life__text">2019 setzt Dominic neue Highlights. Neben einem weiteren Finaleinzug bei den French Open, wo er erneut von Nadal besiegt wird, gewinnt er seinen bis dahin größten Titel: das ATP-1000-Turnier in Indian Wells, auch bekannt als der „fünfte Grand Slam“. Im Finale bezwingt er Roger Federer, einen der größten Spieler aller Zeiten.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2020-australian-open-final.jpg" alt="2020" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2020</h3>
+          <p class="dt-life__text">2020 soll Dominics Jahr werden – er möchte seinen größten Traum verwirklichen: den Gewinn eines Grand Slam-Titels. Zu Beginn des Jahres spielt er sein bestes Tennis und erreicht das Finale der Australian Open. Dabei besiegt er unter anderem Rafael Nadal und Alexander Zverev. Im Endspiel trifft er auf Novak Djokovic, den wohl besten Spieler aller Zeiten. Nach einem epischen Fünf-Satz-Krimi muss sich Dominic jedoch knapp geschlagen geben.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/instagram-post-2.png" alt="September 2020" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">September 2020</h3>
+          <p class="dt-life__text">Wenige Monate später krönt Dominic seine Karriere mit dem größten Triumph: US Open Champion 2020.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2021-2023-wrist-injury.jpg" alt="2021-2023" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2021-2023</h3>
+          <p class="dt-life__text">2021-2023 kämpft Dominic mit einer schweren Handgelenksverletzung, die er sich beim ATP-Turnier auf Mallorca zuzieht. Trotz aller Bemühungen kehrt sein Handgelenk nie wieder vollständig zur alten Stärke zurück.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2024-career-farewell-vienna.jpg" alt="2024" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2024</h3>
+          <p class="dt-life__text">2024 trifft Dominic die Entscheidung, seine Karriere zu beenden. Er spielt noch zehn Turniere, darunter die US Open, die ihm besonders am Herzen liegen. Sein letztes Match bestreitet er in einer ausverkauften Wiener Stadthalle vor fast 9.000 begeisterten Fans. Ein emotionaler und würdiger Abschied.</p>
+        </article>
+
+        <article class="dt-life__card">
+          <img class="dt-life__img" src="assets/media/timeline-2025-new-chapter.jpg" alt="2025" loading="lazy" decoding="async" />
+          <h3 class="dt-life__year">2025</h3>
+          <p class="dt-life__text">Im Jahr 2025 schlägt Dominic ein neues Kapitel in seinem Leben auf. Mit voller Leidenschaft widmet er sich seinen Herzensprojekten Thiem Energy und der Thiem Academy Burgenland. Sein Ziel ist es, unseren Planeten nachhaltiger zu gestalten, anderen Menschen zu helfen und junge Tennisspieler auf ihrem Weg an die Spitze zu begleiten. Dabei möchte er ihnen nicht nur sportliche Fähigkeiten vermitteln, sondern auch wichtige Werte wie Nachhaltigkeit und Bodenständigkeit weitergeben. Mit dieser Mission schreibt Dominic seine Erfolgsgeschichte jenseits des Tennisplatzes fort.</p>
+        </article>
+      </div>
+      <button class="dt-life__nav dt-life__nav--next" type="button" aria-label="Nächste Karte">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<style>
+.dt-life{ padding: 86px 0 84px; }
+.dt-life__wrap{ width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.dt-life__head{ margin-bottom: 18px; }
+.dt-life__eyebrow{ margin: 0 0 8px 0; color: rgba(255,255,255,.55); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.dt-life__title{ margin: 0; font-size: clamp(22px, 2.2vw, 34px); font-weight: 400; color: rgba(255,255,255,.92); }
+.dt-life__railWrap{ position: relative; }
+.dt-life__rail{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 36px) / 3);
+  gap: 18px;
+  overflow-x: auto;
+  padding: 8px 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.dt-life__rail::-webkit-scrollbar{ display: none; }
+.dt-life__card{
+  scroll-snap-align: center;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  padding: 0 0 18px;
+  opacity: .42;
+  transform: scale(.96);
+  transition: opacity .24s ease, transform .24s ease;
+  font-weight: 400;
+}
+.dt-life__card.is-active{ opacity: 1; transform: scale(1); }
+.dt-life__img{
+  width: calc(100% - 18px);
+  margin: 9px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+}
+.dt-life__year{
+  margin: 16px 20px 8px;
+  font-size: 18px;
+  font-weight: 520;
+  line-height: 1.2;
+  letter-spacing: .01em;
+  color: rgba(255,255,255,.92);
+}
+.dt-life__text{
+  margin: 0 20px;
+  color: rgba(255,255,255,.68);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.dt-life__nav{
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0,0,0,.4);
+  color: rgba(255,255,255,.92);
+  font-size: 34px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 4;
+}
+.dt-life__nav--prev{ left: -48px; }
+.dt-life__nav--next{ right: -48px; }
+@media (max-width: 1040px){
+  .dt-life__rail{ grid-auto-columns: calc((100% - 18px) / 2); }
+  .dt-life__nav--prev{ left: -12px; }
+  .dt-life__nav--next{ right: -12px; }
+}
+@media (max-width: 820px){
+  .dt-life__wrap{ width: min(1120px, calc(100% - 24px)); }
+  .dt-life__rail{ grid-auto-columns: 100%; }
+  .dt-life__nav--prev{ left: -4px; }
+  .dt-life__nav--next{ right: -4px; }
+}
+</style>
+
+<script>
+(() => {
+  const rail = document.getElementById('dtLifeRail');
+  if (!rail) return;
+  const originalCards = Array.from(rail.querySelectorAll('.dt-life__card'));
+  const prev = rail.parentElement.querySelector('.dt-life__nav--prev');
+  const next = rail.parentElement.querySelector('.dt-life__nav--next');
+  if (!originalCards.length) return;
+
+  originalCards.forEach((card, i) => card.dataset.realIndex = String(i));
+
+  let cards = [];
+  let step = 0;
+  let cloneCount = 1;
+  let currentIndex = 0;
+  let settleTimer = null;
+  let isAnimating = false;
+
+  const getStep = () => {
+    const style = window.getComputedStyle(rail);
+    const gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+    const cardWidth = originalCards[0].getBoundingClientRect().width || 1;
+    return Math.max(1, cardWidth + gap);
+  };
+
+  const getCloneCount = () => {
+    const nextStep = getStep();
+    return Math.max(1, Math.round(rail.clientWidth / nextStep));
+  };
+
+  const setActive = () => {
+    const active = cards[currentIndex];
+    if (!active) return;
+    cards.forEach(card => card.classList.remove("is-active"));
+    active.classList.add("is-active");
+  };
+
+  const scrollCardToCenter = (index, behavior = "smooth") => {
+    const card = cards[index];
+    if (!card) return;
+    const targetLeft = card.offsetLeft - (rail.clientWidth - card.offsetWidth) / 2;
+    rail.scrollTo({ left: Math.max(0, targetLeft), behavior });
+  };
+
+  const normalizeIndexIfNeeded = () => {
+    const originalLen = originalCards.length;
+    if (currentIndex >= originalLen + cloneCount) {
+      currentIndex -= originalLen;
+      scrollCardToCenter(currentIndex, "auto");
+    } else if (currentIndex < cloneCount) {
+      currentIndex += originalLen;
+      scrollCardToCenter(currentIndex, "auto");
+    }
+    setActive();
+  };
+
+  const scheduleNormalize = () => {
+    if (settleTimer) clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      isAnimating = false;
+      normalizeIndexIfNeeded();
+    }, 420);
+  };
+
+  const goTo = (indexDelta) => {
+    if (isAnimating) return;
+    isAnimating = true;
+    currentIndex += indexDelta;
+    scrollCardToCenter(currentIndex, "smooth");
+    setActive();
+    scheduleNormalize();
+  };
+
+  const rebuildLoop = () => {
+    rail.querySelectorAll(".dt-life__card.is-clone").forEach(node => node.remove());
+    cards = Array.from(rail.querySelectorAll(".dt-life__card"));
+
+    step = getStep();
+    cloneCount = getCloneCount();
+    const originalLen = originalCards.length;
+
+    const prefix = originalCards.slice(-cloneCount).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add("is-clone");
+      return clone;
+    });
+    const suffix = originalCards.slice(0, cloneCount).map(card => {
+      const clone = card.cloneNode(true);
+      clone.classList.add("is-clone");
+      return clone;
+    });
+
+    for (let i = prefix.length - 1; i >= 0; i -= 1) {
+      rail.insertBefore(prefix[i], rail.firstChild);
+    }
+    suffix.forEach(node => rail.appendChild(node));
+
+    cards = Array.from(rail.querySelectorAll(".dt-life__card"));
+    currentIndex = cloneCount;
+    scrollCardToCenter(currentIndex, "auto");
+    setActive();
+  };
+
+  prev?.addEventListener("click", () => goTo(-1));
+  next?.addEventListener("click", () => goTo(1));
+
+  rail.addEventListener("scroll", () => {
+    if (!isAnimating) return;
+    scheduleNormalize();
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    rebuildLoop();
+  });
+
+  rebuildLoop();
+})();
+</script>
+
+<section class="dt-bioCV" aria-label="Biographie als Lebenslauf">
+  <div class="dt-bioCV__wrap">
+
+    <header class="dt-bioCV__header">
+      <p class="dt-bioCV__eyebrow">Biographie</p>
+      <h2 class="dt-bioCV__title">Career Snapshot</h2>
+      <p class="dt-bioCV__sub"></p>
+    </header>
+
+    <div class="dt-bioCV__grid">
+
+      
+      <aside class="dt-bioCV__panel" aria-label="Profil & Key Facts">
+
+        <div class="dt-bioCV__block">
+          <p class="dt-bioCV__kicker">Profil</p>
+
+          <div class="dt-bioCV__profileStack">
+            <div class="dt-bioCV__avatar dt-bioCV__avatar--lg">
+              <img
+                src="assets/media/dominic-thiem-portrait-about.png"
+                alt="Dominic Thiem Portrait"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <h3 class="dt-bioCV__headline dt-bioCV__headline--lg">Dominic Thiem</h3>
+
+            <p class="dt-bioCV__copy">
+             Dominic Thiem ist mehr als ein ehemaliger Weltklasse-Tennisspieler. Als US-Open-Champion und frühere Nummer 3 der Welt hat er sportliche Geschichte geschrieben - heute nutzt er diese Plattform, um Verantwortung zu übernehmen und Zukunft aktiv mitzugestalten.<br><br>
+
+Dominic steht für gelebte Nachhaltigkeit, Authentizität und Bodenständigkeit. Er verbindet Leistungssport mit Gesundheit, Lifestyle und unternehmerischem Denken und engagiert sich gezielt in Projekten, die langfristigen Mehrwert schaffen für Menschen, Gemeinschaften und kommende Generationen. Als Impact Personality, Investor und Mentor inspiriert Dominic dazu, bewusster zu leben, mutiger zu handeln und Zukunft nicht nur zu denken, sondern umzusetzen.
+
+            </p>
+          </div>
+        </div>
+
+        <div class="dt-bioCV__divider" aria-hidden="true"></div>
+
+        <div class="dt-bioCV__block">
+          <div class="dt-bioCV__facts" role="list" aria-label="Rollenbild">
+            <div class="dt-bioCV__fact" role="listitem">
+              <span class="dt-bioCV__factLabel">Background</span>
+              <span class="dt-bioCV__factValue">Ehemalige Nr. 3 der ATP Weltrangliste<br>
+US Open Champion 2020
+</span>
+            </div>
+
+            <div class="dt-bioCV__fact" role="listitem">
+              <span class="dt-bioCV__factLabel">Fokus</span>
+              <span class="dt-bioCV__factValue">Thought Leader in Nachhaltigkeit</span>
+            </div>
+
+            <div class="dt-bioCV__fact" role="listitem">
+              <span class="dt-bioCV__factLabel">Business</span>
+              <span class="dt-bioCV__factValue">Unternehmer &amp; Investor</span>
+            </div>
+
+            <div class="dt-bioCV__fact" role="listitem">
+              <span class="dt-bioCV__factLabel">Impact</span>
+              <span class="dt-bioCV__factValue">Mentor einer neuen Generation</span>
+            </div>
+
+            <div class="dt-bioCV__fact" role="listitem">
+              <span class="dt-bioCV__factLabel">Voice</span>
+              <span class="dt-bioCV__factValue">Lifestyle &amp; Impact</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dt-bioCV__divider" aria-hidden="true"></div>
+
+        <div class="dt-bioCV__block">
+          <div class="dt-bioCV__signature">
+            <img
+              src="assets/media/dt-signatur-2.png"
+              alt="Dominic Thiem Signatur"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+
+      </aside>
+
+      
+      <div class="dt-bioCV__panel dt-bioCV__panel--main" aria-label="Lebenslauf Timeline">
+
+        <div class="dt-bioCV__sectionHead">
+          <p class="dt-bioCV__kicker">Lebenslauf</p>
+          <h3 class="dt-bioCV__headline">Karriere &amp; Projekte</h3>
+        </div>
+
+        <ol class="dt-bioCV__timeline" aria-label="Stationen">
+
+          <li class="dt-bioCV__item">
+            <span class="dt-bioCV__dot" aria-hidden="true"></span>
+            <div class="dt-bioCV__itemCard">
+              <div class="dt-bioCV__itemTop">
+                <p class="dt-bioCV__period">2020</p>
+                <p class="dt-bioCV__role">Karriere-Highlight</p>
+              </div>
+              <h4 class="dt-bioCV__itemTitle">US Open Champion</h4>
+              <p class="dt-bioCV__itemText">
+                Größter Karriereerfolg: Sieg bei den US Open 2020 – als erster Spieler seit über 70 Jahren
+                ein Grand-Slam-Finale nach 0:2-Satzrückstand gedreht.
+              </p>
+              
+            </div>
+          </li>
+
+          <li class="dt-bioCV__item">
+            <span class="dt-bioCV__dot" aria-hidden="true"></span>
+            <div class="dt-bioCV__itemCard">
+              <div class="dt-bioCV__itemTop">
+                <p class="dt-bioCV__period">2016–2022</p>
+                <p class="dt-bioCV__role">Weltspitze</p>
+              </div>
+              <h4 class="dt-bioCV__itemTitle">17 ATP-Titel · Finals · Ranking #3</h4>
+              <p class="dt-bioCV__itemText">
+                Insgesamt 17 ATP-Titel (u.a. Indian Wells, Wien, Kitzbühel),
+                zwei French-Open-Finals und ein Australian-Open-Finale.
+                Bestes Ranking: ATP Platz 3. Mehrfache Siege gegen die „Big Three“.
+              </p>
+              
+            </div>
+          </li>
+
+          <li class="dt-bioCV__item">
+            <span class="dt-bioCV__dot" aria-hidden="true"></span>
+            <div class="dt-bioCV__itemCard">
+              <div class="dt-bioCV__itemTop">
+                <p class="dt-bioCV__period">23.10.2024</p>
+                <p class="dt-bioCV__role">Karriereabschluss</p>
+              </div>
+              <h4 class="dt-bioCV__itemTitle">Abschied in Wien</h4>
+              <p class="dt-bioCV__itemText">
+                Beendete seine außergewöhnliche Karriere zuhause in der Wiener Stadthalle
+                vor fast 9.000 begeisterten Zuschauern.
+              </p>
+             
+            </div>
+          </li>
+
+          <li class="dt-bioCV__item">
+            <span class="dt-bioCV__dot" aria-hidden="true"></span>
+            <div class="dt-bioCV__itemCard">
+              <div class="dt-bioCV__itemTop">
+                <p class="dt-bioCV__period">Heute</p>
+                <p class="dt-bioCV__role">Sustainability Projekte</p>
+              </div>
+              <h4 class="dt-bioCV__itemTitle">Thiem Energy · Thiem View</h4>
+              <p class="dt-bioCV__itemText">
+                Nach der Karriere widmet sich Dominic seinen Projekten: <br><br>
+
+<b>Thiem Energy</b><br>
+Ein revolutionäres Modell für faire, nachhaltige Energie.
+Mission: Energie neu denken - gemeinschaftlich, unabhängig, zukunftssicher.<br><br>
+
+<b>Thiem View</b><br>
+Lifestyle- und Sport-Sonnenbrillen mit klarem Nachhaltigkeitsanspruch.
+Thiem View verbindet Design, Funktion und Verantwortung für den Planeten.
+Mission: Stil neu denken - nachhaltig produziert, bewusst getragen.
+
+              </p>
+              
+            </div>
+          </li>
+
+          <li class="dt-bioCV__item">
+            <span class="dt-bioCV__dot" aria-hidden="true"></span>
+            <div class="dt-bioCV__itemCard">
+              <div class="dt-bioCV__itemTop">
+                <p class="dt-bioCV__period">Seit 2025</p>
+                <p class="dt-bioCV__role">Talentschmiede</p>
+              </div>
+              <h4 class="dt-bioCV__itemTitle">Thiem Academy Burgenland</h4>
+              <p class="dt-bioCV__itemText">
+Die Academy vermittelt Charakter, Disziplin und Verantwortungsbewusstsein.
+Dominic ist Mentor, Vorbild und Impulsgeber für die nächste Generation.
+
+              </p>
+              
+            </div>
+          </li>
+
+        </ol>
+
+        <div class="dt-bioCV__closing">
+          <p class="dt-bioCV__closingText">
+            Dominic Thiem steht nicht nur für herausragenden Sport, sondern auch für Inspiration,
+            Authentizität und eine Vision, die weit über den Tennisplatz hinausgeht.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  :root{
+    --dt-text: rgba(255,255,255,.90);
+    --dt-muted: rgba(255,255,255,.68);
+    --dt-soft: rgba(255,255,255,.52);
+    --dt-border: rgba(255,255,255,.10);
+    --dt-bg: #171717;
+    --dt-radius: 22px;
+  }
+
+  /* ✅ Standalone background for this section only */
+  .dt-bioCV{
+    position: relative;
+    background: var(--dt-bg);
+    overflow: hidden;
+    padding: clamp(44px, 7vh, 110px) 0;
+  }
+
+  .dt-bioCV::before{
+    content:"";
+    position:absolute; inset:-10%;
+    background:
+      radial-gradient(980px 520px at 16% 18%, rgba(255,255,255,.06) 0%, rgba(255,255,255,.03) 26%, rgba(255,255,255,0) 62%),
+      radial-gradient(980px 520px at 86% 88%, rgba(255,255,255,.05) 0%, rgba(255,255,255,.028) 28%, rgba(255,255,255,0) 62%);
+    pointer-events:none;
+  }
+  .dt-bioCV *{ box-sizing:border-box; }
+  .dt-bioCV .dt-bioCV__wrap{ position:relative; z-index:2; }
+
+  /* ============================================================
+     DT BIO CV
+  ============================================================ */
+  .dt-bioCV__wrap{
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .dt-bioCV__header{
+    max-width: 860px;
+    margin-bottom: clamp(18px, 2.8vw, 30px);
+  }
+
+  .dt-bioCV__eyebrow{
+    margin: 0 0 10px 0;
+    color: var(--dt-soft);
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .dt-bioCV__title{
+    margin: 0 0 12px 0;
+    color: var(--dt-text);
+    font-weight: 500;
+    line-height: 1.08;
+    font-size: clamp(20px, 2vw, 32px);
+    max-width: 32ch;
+  }
+
+  .dt-bioCV__sub{
+    margin: 0;
+    color: var(--dt-muted);
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.7;
+    max-width: 78ch;
+  }
+
+  .dt-bioCV__grid{
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 18px;
+    align-items: start;
+    margin-top: 18px;
+  }
+
+  .dt-bioCV__panel{
+    border: 1px solid var(--dt-border);
+    border-radius: calc(var(--dt-radius) + 6px);
+    background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 18px 50px rgba(0,0,0,.20);
+    overflow: hidden;
+  }
+
+  .dt-bioCV__panel--main{ padding: 18px; }
+  .dt-bioCV__panel:not(.dt-bioCV__panel--main){ padding: 18px; }
+
+  .dt-bioCV__block{ display: grid; gap: 10px; }
+
+  .dt-bioCV__divider{
+    height: 1px;
+    background: rgba(255,255,255,.10);
+    margin: 16px 0;
+  }
+
+  .dt-bioCV__kicker{
+    margin: 0;
+    color: rgba(255,255,255,.46);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .dt-bioCV__headline{
+    margin: 0;
+    color: rgba(255,255,255,.92);
+    font-weight: 520;
+    font-size: 18px;
+    letter-spacing: .01em;
+    line-height: 1.2;
+  }
+  .dt-bioCV__headline--lg{
+    font-size: 16px;
+    line-height: 1.15;
+  }
+
+  .dt-bioCV__copy{
+    margin: 0;
+    color: rgba(255,255,255,.70);
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .dt-bioCV__profileStack{ display: grid; gap: 12px; }
+
+  .dt-bioCV__avatar{
+    width: 264px!important;
+    height: 444px!important;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.22);
+    box-shadow: 0 18px 46px rgba(0,0,0,.22);
+    isolation: isolate;
+  }
+
+  .dt-bioCV__avatar--lg{
+    width: 120px;
+    height: 120px;
+    border-radius: 26px;
+  }
+
+  .dt-bioCV__avatar img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border-radius: inherit;
+    transform: none;
+  }
+
+  .dt-bioCV__facts{ display: grid; gap: 12px; padding-top: 6px; }
+
+  .dt-bioCV__fact{
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,.10);
+    display: grid;
+    gap: 4px;
+  }
+  .dt-bioCV__fact:first-child{ border-top: 0; padding-top: 0; }
+
+  .dt-bioCV__factLabel{
+    color: rgba(255,255,255,.46);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .dt-bioCV__factValue{
+    color: rgba(255,255,255,.84);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .dt-bioCV__signature{
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.20);
+    border-radius: 18px;
+    padding: 14px 14px;
+    display: grid;
+    place-items: center;
+  }
+  .dt-bioCV__signature img{
+    max-width: 100%;
+    max-height: 52px;
+    object-fit: contain;
+    opacity: .92;
+    display: block;
+    border-radius: 0 !important;
+  }
+
+  .dt-bioCV__sectionHead{ display: grid; gap: 8px; margin-bottom: 12px; }
+
+  .dt-bioCV__timeline{
+    list-style: none;
+    margin: 0;
+    padding: 0 0 18px;
+    display: grid;
+    gap: 14px;
+    position: relative;
+    --dt-progress: 0;
+  }
+
+  .dt-bioCV__timeline::before{
+    content:"";
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: rgba(255,255,255,.10);
+  }
+
+  .dt-bioCV__timeline::after{
+    content:"";
+    position:absolute;
+    left: 10px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    pointer-events:none;
+    z-index: 2;
+    background: rgba(255,255,255,.92);
+    transform-origin: top;
+    transform: scaleY(var(--dt-progress));
+    box-shadow:
+      0 0 10px rgba(255,255,255,.18),
+      0 0 18px rgba(255,255,255,.10);
+    opacity: .95;
+  }
+
+  .dt-bioCV__item{ position: relative; padding-left: 34px; }
+
+  .dt-bioCV__dot{
+    position: absolute;
+    left: 4px;
+    top: 18px;
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(0,0,0,.35);
+    box-shadow: 0 0 0 6px rgba(255,255,255,.03);
+    animation: dtPulse 2.6s ease-in-out infinite;
+    transition: background .25s ease, box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+  }
+
+  .dt-bioCV__item.is-complete .dt-bioCV__dot{
+    background: rgba(255,255,255,.92);
+    border-color: rgba(255,255,255,.55);
+    transform: scale(1.06);
+    box-shadow:
+      0 0 0 8px rgba(255,255,255,.06),
+      0 0 18px rgba(255,255,255,.18);
+  }
+
+  @keyframes dtPulse{
+    0%, 100%{
+      transform: scale(1);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.03);
+      border-color: rgba(255,255,255,.18);
+    }
+    50%{
+      transform: scale(1.08);
+      box-shadow: 0 0 0 10px rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.26);
+    }
+  }
+
+  .dt-bioCV__itemCard{
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 20px;
+    background: rgba(0,0,0,.18);
+    padding: 14px 14px 12px;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease;
+  }
+
+  .dt-bioCV__itemCard:hover{
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,.20);
+    background: rgba(255,255,255,.03);
+  }
+
+  .dt-bioCV__itemTop{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .dt-bioCV__period{
+    margin: 0;
+    color: rgba(255,255,255,.55);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  font-weight: 400;
+  }
+
+  .dt-bioCV__role{
+    margin: 0;
+    color: rgba(255,255,255,.55);
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: right;
+  }
+
+  .dt-bioCV__itemTitle{
+    margin: 0 0 8px 0;
+    color: rgba(255,255,255,.92);
+    font-weight: 520;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .dt-bioCV__itemText{
+    margin: 0;
+    color: rgba(255,255,255,.70);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .dt-bioCV__itemTags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .dt-bioCV__pill{
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.22);
+    color: rgba(255,255,255,.70);
+    font-size: 12.5px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .dt-bioCV__closing{
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.10);
+  }
+
+  .dt-bioCV__closingText{
+    margin: 0;
+    color: rgba(255,255,255,.68);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 980px){
+    .dt-bioCV__grid{ grid-template-columns: 1fr; }
+    .dt-bioCV__panel--main{ padding: 16px; }
+  }
+
+  @media (max-width: 520px){
+    .dt-bioCV__wrap{ width: min(1120px, calc(100% - 28px)); }
+    .dt-bioCV__item{ padding-left: 30px; }
+    .dt-bioCV__timeline::before{ left: 9px; }
+    .dt-bioCV__timeline::after{ left: 9px; }
+    .dt-bioCV__dot{ left: 3px; }
+
+    .dt-bioCV__avatar--lg{
+      width: 104px;
+      height: 104px;
+      border-radius: 22px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dt-bioCV__itemCard{ transition: none; }
+    .dt-bioCV__itemCard:hover{ transform: none; }
+    .dt-bioCV__dot{ animation: none; }
+  }
+  
+  
+  /* ✅ Remove section background completely */
+.dt-bioCV{
+  background: transparent !important;
+}
+
+/* ✅ Remove the gradient overlay */
+.dt-bioCV::before{
+  content: none !important;
+  background: none !important;
+}
+
+</style>
+
+<script>
+(() => {
+  function initTimelineProgress(){
+    const timeline = document.querySelector('.dt-bioCV__timeline');
+    if (!timeline) return;
+
+    const items = Array.from(timeline.querySelectorAll('.dt-bioCV__item'));
+    if (!items.length) return;
+
+    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+    function update(){
+      const rect = timeline.getBoundingClientRect();
+      const total = rect.height;
+      if (total <= 0) return;
+
+      const startY = window.innerHeight * 0.22;
+      const endY   = window.innerHeight * 0.84;
+
+      const current = (endY - rect.top);
+      const progressPx = clamp(current - startY, 0, total);
+      const progress = clamp(progressPx / total, 0, 1);
+
+      timeline.style.setProperty('--dt-progress', progress.toFixed(4));
+
+      const thresholdY = startY + (total * progress);
+
+      items.forEach((item) => {
+        const dot = item.querySelector('.dt-bioCV__dot');
+        if (!dot) return;
+
+        const dr = dot.getBoundingClientRect();
+        const dotY = dr.top + dr.height/2;
+
+        const complete = dotY <= thresholdY;
+        item.classList.toggle('is-complete', complete);
+      });
+    }
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTimelineProgress);
+  } else {
+    initTimelineProgress();
+  }
+})();
+</script>
+
+<footer class="dt-footer" aria-label="Footer">
+  <div class="dt-footer__wrap">
+    <a class="dt-footer__logo" href="index.html" aria-label="Startseite">
+      <img src="assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="lazy" decoding="async" />
+    </a>
+
+    <nav class="dt-footer__links" aria-label="Footer Navigation">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+
+    <div class="dt-footer__social" aria-label="Social Media">
+      <a href="https://www.facebook.com/1.Dominic.Thiem/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.1h2.7l.4-3.2h-3.1V7.7c0-.9.2-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2v2.4H8v3.2h2.7V21h2.8z"/></svg>
+      </a>
+      <a href="https://x.com/domithiem" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3h2.9l-6.4 7.4L23 21h-6l-4.7-6.2L6.9 21H4l6.9-7.9L1.4 3h6.1l4.2 5.6L18.9 3zm-1 16.3h1.6L6.6 4.6H4.9l13 14.7z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/c/dominicthiem" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.5-.4-5.2c-.2-1-.9-1.7-1.9-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.7.5c-1 .3-1.7 1-1.9 2C1 8.5 1 12 1 12s0 3.5.4 5.2c.2 1 .9 1.7 1.9 2 1.8.5 8.7.5 8.7.5s6.9 0 8.7-.5c1-.3 1.7-1 1.9-2 .4-1.7.4-5.2.4-5.2zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/domithiem/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 2C5.7 4 4 5.7 4 7.8v8.4c0 2.1 1.7 3.8 3.8 3.8h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8c0-2.1-1.7-3.8-3.8-3.8H7.8zm8.9 1.5a1.3 1.3 0 110 2.6 1.3 1.3 0 010-2.6zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/dominic-thiem-03a46a291/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.9-2 3.9-2 4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* dt-nav-scroll-init */
+(() => {
+  const nav = document.querySelector(".dt-nav");
+  if (!nav) return;
+  const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+})();
+</script>
+
+<script src="assets/js/mobile-nav.js" defer></script>
+</body>
+</html>

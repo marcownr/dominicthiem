@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/jpeg" href="assets/media/dt-favicon.jpg" />
+  <link rel="shortcut icon" href="assets/media/dt-favicon.jpg" />
+  <title>Investments – Dominic Thiem</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #171717;
+      color: #fff;
+      font-family: var(--dt-font-primary);
+    }
+    * { box-sizing: border-box; }
+    a { color: inherit; }
+  </style>
+<style>
+.dt-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+}
+
+.dt-nav.is-scrolled{
+  background: rgba(23,23,23,.96);
+  border-bottom-color: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dt-nav__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dt-nav__logo{ display: inline-flex; align-items: center; }
+.dt-nav__logo img{
+  width: 86px;
+  height: auto;
+  display: block;
+  border-radius: 0 !important;
+}
+
+.dt-nav__menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.dt-nav__menu > li{ position: relative; }
+
+.dt-nav__link,
+.dt-nav__trigger,
+.dt-nav__lang{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .18s ease, opacity .18s ease;
+}
+
+.dt-nav__lang.is-active{
+  opacity: .45;
+  cursor: default;
+  pointer-events: none;
+  border-bottom-color: transparent !important;
+}
+
+.dt-nav__lang{ opacity: .9; }
+
+.dt-nav__link:hover,
+.dt-nav__trigger:hover,
+.dt-nav__lang:hover,
+.dt-nav__link.is-active,
+.dt-nav__trigger.is-active{
+  border-bottom-color: rgba(255,255,255,.92);
+}
+
+.dt-nav__arrow{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 7px;
+  border-right: 2px solid rgba(255,255,255,.96);
+  border-bottom: 2px solid rgba(255,255,255,.96);
+  transform: translateY(-2px) rotate(45deg);
+  opacity: .98;
+}
+
+.dt-nav__dropdown{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 272px;
+  width: max-content;
+  padding: 8px 0;
+  background: rgba(23,23,23,.98);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  display: grid;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+}
+
+.dt-nav__item--projects:hover .dt-nav__dropdown,
+.dt-nav__item--projects:focus-within .dt-nav__dropdown{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dt-nav__dropdown a{
+  color: rgba(255,255,255,.94);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: block;
+  white-space: nowrap;
+  font-weight: 400;
+  opacity: .92;
+  transition: background .16s ease, opacity .16s ease;
+}
+
+.dt-nav__dropdown a:hover{
+  opacity: 1;
+  background: rgba(255,255,255,.08);
+}
+
+@media (max-width: 1280px){
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+  
+}
+
+@media (max-width: 960px){
+  .dt-nav__wrap{
+    width: min(1120px, calc(100% - 28px));
+    min-height: 84px;
+    align-items: flex-start;
+    padding-top: 18px;
+    flex-direction: column;
+  }
+
+  .dt-nav__logo img{ width: 72px; }
+
+  .dt-nav__menu{
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+
+  .dt-nav__dropdown{
+    position: static;
+    min-width: 0;
+    padding-top: 2px;
+    transform: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dt-nav__item--projects:hover .dt-nav__dropdown,
+  .dt-nav__item--projects:focus-within .dt-nav__dropdown{
+    display: grid;
+  }
+
+  
+}
+</style>
+
+<style>
+.dt-footer{
+  margin-top: 80px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #171717;
+}
+
+.dt-footer__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 140px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.dt-footer__logo{
+  display: inline-flex;
+  align-items: center;
+}
+
+.dt-footer__logo img{
+  width: 86px !important;
+  max-width: 86px !important;
+  min-width: 86px !important;
+  height: auto !important;
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 0 !important;
+}
+
+.dt-footer__links{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.dt-footer__links a{
+  color: rgba(255,255,255,.88);
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: .01em;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__links a:hover,
+.dt-footer__social a:hover{
+  opacity: .7;
+}
+
+.dt-footer__social{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dt-footer__social a{
+  width: 34px;
+  height: 34px;
+  color: #fff !important;
+  opacity: .92;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__social svg{
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  fill: currentColor !important;
+  opacity: 1;
+}
+
+@media (max-width: 1100px){
+  .dt-footer__wrap{
+    width: min(1120px, calc(100% - 28px));
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 26px 0;
+    gap: 20px;
+  }
+
+  .dt-footer__links{
+    gap: 28px;
+  }
+
+  .dt-footer__links a{
+    font-size: 16px;
+}
+}
+</style>
+
+<style id="dt-brand-theme">
+:root{
+  --dt-primary:#00f3ff;
+  --dt-secondary:#ffffff;
+  --dt-accent:#00f3ff;
+  --dt-font-primary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-font-secondary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-weight-primary:400;
+  --dt-weight-secondary:400;
+  --dt-weight-text:400;
+  --dt-weight-accent:500;
+}
+html,body{ color:var(--dt-secondary); text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+html{ -webkit-font-smoothing: antialiased; }
+body{ font-family: var(--dt-font-primary); font-weight:var(--dt-weight-text); }
+p{ font-family: var(--dt-font-primary); font-weight:400; }
+h1,h2,h3,h4,h5,h6{ font-weight:var(--dt-weight-primary); }
+strong,b{ font-weight:var(--dt-weight-accent); }
+.dt-accent,[data-accent="true"]{ color:var(--dt-accent); font-weight:var(--dt-weight-accent); }
+
+/* remove glow effects globally */
+.dt-page::before,
+.dt-projects::before,
+.dt-bioCV::before,
+.dt-partners::before,
+.dt-store::before,
+.dt-autograph::before,
+.dt-umbrella::before{
+  content:none !important;
+  background:none !important;
+}
+
+.dt-page,
+.dt-projects,
+.dt-bioCV,
+.dt-partners,
+.dt-store,
+.dt-autograph,
+.dt-umbrella{
+  background:transparent !important;
+}
+</style>
+
+<link rel="stylesheet" href="assets/css/mobile-nav.css">
+</head>
+<body>
+
+<nav class="dt-nav" aria-label="Hauptnavigation">
+  <div class="dt-nav__wrap">
+    <a class="dt-nav__logo" href="index.html" aria-label="Startseite">
+      <img src="assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="eager" decoding="async" />
+    </a>
+
+    <ul class="dt-nav__menu">
+      <li><a class="dt-nav__link" href="about.html">About</a></li>
+
+      <li class="dt-nav__item--projects">
+        <a class="dt-nav__trigger" href="projekte.html">Projekte <span class="dt-nav__arrow" aria-hidden="true"></span></a>
+        <div class="dt-nav__dropdown" aria-label="Projekte Untermenü">
+          <a href="projekte/thiem-energy.html">THIEM ENERGY</a>
+          <a href="projekte/thiem-view.html">THIEM VIEW</a>
+          <a href="projekte/thiem-academy-burgenland.html">THIEM ACADEMY</a>
+        </div>
+      </li>
+
+      <li><a class="dt-nav__link" href="partner.html">Partner</a></li>
+      <li><a class="dt-nav__link is-active" href="investments.html">Investments</a></li>
+      <li><a class="dt-nav__link" href="https://shop.dominicthiem.com/" target="_blank" rel="noopener noreferrer">Shop</a></li>
+      <li><a class="dt-nav__lang is-active" href="#" aria-label="Sprache Deutsch" aria-current="true">DE</a></li>
+      <li><a class="dt-nav__lang" href="/en/investments/" aria-label="Language English">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="dtp-hero" aria-label="Investments Hero">
+  <div class="dtp-hero__media" role="img" aria-label="Investment Visual"></div>
+
+  <div class="dtp-hero__wrap">
+    <div class="dtp-hero__content">
+      
+      <p class="dtp-hero__eyebrow">INVESTMENTS</p>
+
+      <h1 class="dtp-hero__title">
+        Long-term impact<br />
+        over short-term trends.
+      </h1>
+
+      <p class="dtp-hero__sub">
+        Dominic Thiem investiert gezielt in Unternehmen, die Innovation, Nachhaltigkeit, Gesundheit, Sport und Community miteinander verbinden. Alle Investments folgen einer klaren Logik: langfristiger Mehrwert statt kurzfristiger Trend.<br><br>
+
+Seine Beteiligungen entstehen aus persönlicher Überzeugung, eigener Erfahrung und dem klaren Anspruch, Projekte zu unterstützen, die einen positiven Einfluss auf Alltag, Gesundheit und Zukunft haben.
+
+      </p>
+
+    </div>
+
+    <a class="dtp-hero__scroll" href="#content" aria-label="Scroll to content">
+      <span class="dtp-hero__scrollLine"></span>
+      <span class="dtp-hero__scrollText">Scroll</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  /* ===== PARTNER HERO (Standalone) ===== */
+  .dtp-hero{
+    --dtp-text: rgba(255,255,255,.92);
+    --dtp-muted: rgba(255,255,255,.70);
+    --dtp-soft: rgba(255,255,255,.52);
+    --dtp-border: rgba(255,255,255,.12);
+    --dtp-radius: 22px;
+
+    position: relative;
+    min-height: clamp(640px, 95vh, 900px);
+    overflow: hidden;
+    background: #171717;
+  }
+
+  /* Background image layer */
+  .dtp-hero__media{
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg,
+        rgba(0,0,0,.82) 0%,
+        rgba(0,0,0,.58) 26%,
+        rgba(0,0,0,.32) 46%,
+        rgba(0,0,0,.10) 70%,
+        rgba(0,0,0,0) 100%
+      ),
+      radial-gradient(1200px 520px at 18% 12%,
+        rgba(255,255,255,.08) 0%,
+        rgba(255,255,255,0) 60%
+      ),
+      url("assets/media/dominic-thiem-hero-main.jpg");
+    background-size: cover;
+    background-position: center 20%;
+    transform: scale(1.02);
+    filter: saturate(.95) contrast(1.02);
+  }
+
+  /* Soft vignette for depth */
+  .dtp-hero::after{
+    content:"";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(900px 420px at 15% 35%,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,.35) 70%,
+      rgba(0,0,0,.62) 100%
+    );
+    opacity: .70;
+  }
+
+  .dtp-hero__wrap{
+    position: relative;
+    z-index: 2;
+    width: min(1160px, calc(100% - 48px));
+    margin: 0 auto;
+    height: 100%;
+    min-height: inherit;
+    display: grid;
+    align-items: center;
+    padding: clamp(92px, 12vh, 140px) 0 clamp(28px, 5vh, 52px);
+  }
+
+  .dtp-hero__content{
+    max-width: 660px;
+  }
+
+  .dtp-hero__eyebrow{
+    margin: 0 0 12px 0;
+    color: rgba(255,255,255,.72);
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+
+  .dtp-hero__title{
+    margin: 0 0 14px 0;
+    color: var(--dtp-text);
+    font-weight: 500;
+    line-height: 1.03;
+    font-size: clamp(34px, 4.1vw, 64px);
+    text-wrap: balance;
+  }
+
+  .dtp-hero__sub{
+    margin: 0;
+    color: var(--dtp-muted);
+    font-size: clamp(15px, 1.25vw, 18px);
+    line-height: 1.7;
+    max-width: 72ch;
+  }
+
+  /* Chips */
+  .dtp-hero__pillars{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .dtp-hero__chip{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(0,0,0,.22);
+    color: rgba(255,255,255,.70);
+    font-size: 13px;
+    line-height: 1;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .dtp-hero__chip strong{
+    font-weight: 850;
+    color: rgba(255,255,255,.95);
+    text-decoration: underline;
+    text-underline-offset: .18em;
+    text-decoration-thickness: .12em;
+  }
+
+  /* Actions */
+  .dtp-hero__actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .dtp-hero__btn{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    padding: 0 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: .02em;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    will-change: transform;
+    white-space: nowrap;
+  font-weight: 400;
+  }
+
+  .dtp-hero__btn--primary{
+    background: rgba(255,255,255,.92);
+    color: rgba(0,0,0,.92) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+  }
+
+  .dtp-hero__btn--ghost{
+    background: transparent;
+    color: rgba(255,255,255,.88);
+    border: 1px solid rgba(255,255,255,.18);
+  }
+
+  .dtp-hero__btn:hover{ transform: translateY(-1px); }
+  .dtp-hero__btn--ghost:hover{
+    background: rgba(255,255,255,.06);
+    border-color: rgba(255,255,255,.26);
+  }
+
+  /* Meta */
+  .dtp-hero__meta{
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    display: grid;
+    gap: 10px;
+    max-width: 560px;
+  }
+
+  .dtp-hero__metaItem{
+    display: grid;
+    gap: 3px;
+  }
+
+  .dtp-hero__metaLabel{
+    color: rgba(255,255,255,.46);
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .dtp-hero__metaValue{
+    color: rgba(255,255,255,.82);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Scroll cue */
+  .dtp-hero__scroll{
+    position: absolute;
+    right: 0;
+    bottom: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.62);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    padding: 10px 0 10px 12px;
+  }
+
+  .dtp-hero__scrollLine{
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,.34);
+    display: inline-block;
+    transform-origin: left;
+    animation: dtp-scroll 1.6s ease-in-out infinite;
+  }
+
+  @keyframes dtp-scroll{
+    0%, 100%{ transform: scaleX(.55); opacity: .6; }
+    50%{ transform: scaleX(1); opacity: 1; }
+  }
+
+  /* Responsive */
+  @media (max-width: 860px){
+    .dtp-hero__wrap{
+      padding: 96px 0 38px;
+    }
+    .dtp-hero__content{
+      max-width: 720px;
+    }
+    .dtp-hero__scroll{
+      right: auto;
+      left: 0;
+    }
+  }
+
+  @media (max-width: 560px){
+    .dtp-hero__actions .dtp-hero__btn{ width: 100%; }
+    .dtp-hero__media{ background-position: center 12%; }
+    .dtp-hero__sub br{ display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dtp-hero__btn{ transition: none; }
+    .dtp-hero__btn:hover{ transform: none; }
+    .dtp-hero__scrollLine{ animation: none; }
+  }
+</style>
+
+<section class="dt-investP" id="content" aria-label="Zukunft & Investments">
+  <div class="dt-investP__wrap">
+
+    <div class="dt-investP__grid" role="list">
+
+      <article class="dt-investP__card" role="listitem" aria-label="Biogena">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/bowf-logo-white-1.png" alt="Biogena" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">Biogena</h3>
+              <p class="dt-investP__meta">Gesundheit · Prävention · Langlebigkeit</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          Biogena ist eines von Dominics neuesten Investments im Bereich Gesundheit, Prävention und Langlebigkeit. Die Marke steht für wissenschaftlich fundierte Mikronährstoffkonzepte, höchste Qualität und einen ganzheitlichen Ansatz für langfristiges Wohlbefinden. Die Partnerschaft spiegelt Dominics Überzeugung wider, dass nachhaltige Leistungsfähigkeit und Lebensqualität auf bewussten Entscheidungen, Prävention und moderner Gesundheitskompetenz basieren.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://biogena.com/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+      <article class="dt-investP__card" role="listitem" aria-label="FANtium">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/fantium-logo-white.png" alt="FANtium" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">FANtium</h3>
+              <p class="dt-investP__meta">Sport · Technologie · Community</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          FANtium revolutioniert die Finanzierung von Sportler:innen durch digitale Beteiligungsmodelle. Dominic investiert hier an der Schnittstelle von Sport, Technologie und Community. Aus sportlicher Perspektive, insbesondere auch im Tennis, sieht Dominic großen Handlungsbedarf, jungen Talenten den Zugang zu professioneller Förderung zu ermöglichen. FANtium schafft neue Wege, um Karrieren finanzierbar zu machen und die nächste Generation aktiv zu unterstützen. Ein Investment mit direktem Impact auf den Nachwuchssport.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://www.fantium.com/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+      <article class="dt-investP__card" role="listitem" aria-label="Hut & Stiel">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/hut-und-stiel-logo.png" alt="Hut & Stiel" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">Hut &amp; Stiel</h3>
+              <p class="dt-investP__meta">Nachhaltige Ernährung · Urban Lifestyle</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          Hut &amp; Stiel verbindet nachhaltige Lebensmittelproduktion mit urbanem Lifestyle und moderner Kulinarik. Das Unternehmen steht für Regionalität, bewussten Konsum und eine neue Form der Wertschätzung für Lebensmittel. Dominics Interesse an Hut &amp; Stiel entstand bereits vor rund zehn Jahren, als er das Projekt zufällig entdeckte. Besonders die Zucht von Pilzen empfindet er bis heute als faszinierend, sowohl technologisch als auch ökologisch. Pilze ein zentraler Baustein zukünftiger, nachhaltiger Ernährungssysteme.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://hutundstiel.at/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+      <article class="dt-investP__card" role="listitem" aria-label="NEOH">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/neoh-logo.png" alt="NEOH" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">NEOH</h3>
+              <p class="dt-investP__meta">Better Sweets · Gesundheit</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          NEOH steht für eine neue Generation von Süßwaren - ohne Zuckerzusatz und ohne Kompromisse beim Geschmack. NEOH war Dominics erstes Investment und hat daher einen besonderen Stellenwert. Er ist seit Beginn an beteiligt und überzeugt davon, dass die Reduktion von Zucker eine der wichtigsten gesundheitlichen Herausforderungen unserer Zeit ist. Das Unternehmen zeigt, dass bewusste Ernährung massentauglich und genussvoll zugleich sein kann.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://www.neoh.com/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+      <article class="dt-investP__card" role="listitem" aria-label="Precision">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/precision-logo-white.png" alt="Precision" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">Precision®</h3>
+              <p class="dt-investP__meta">Nutrition · Food Innovation</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          Ein Investment im Bereich moderne Ernährung und nachhaltige Lebensmittelinnovation. Precision steht für hochwertige Nährstoffe, funktionalen Mehrwert und eine deutlich bessere ökologische Bilanz. Dominic unterstützt das Unternehmen aus Überzeugung, weil gesunde Ernährung ein zentraler Hebel für Leistungsfähigkeit, Wohlbefinden und Langlebigkeit ist. Für ihn ein Projekt mit Substanz, Vision und langfristiger Relevanz.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://precision-food.com/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+      <article class="dt-investP__card" role="listitem" aria-label="Smash">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/smash-logo-green.png" alt="Smash" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">Smash</h3>
+              <p class="dt-investP__meta">Racketsports · Lifestyle · Community</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          Smash ist Dominics neuestes Investment und sein Einstieg in einen der weltweit am schnellsten wachsenden Racketsport-Trends. Das Projekt vereint Sport, Lifestyle und Community mit starkem Zukunftspotenzial. Dominic spielt selbst leidenschaftlich gerne Padel und Pickleball und schätzt besonders die Zugänglichkeit, Dynamik und soziale Komponente dieser Sportarten. Schnell erlernbar, modern und gemeinschaftsorientiert - Smash wird vor allem im österreichischen Markt als Projekt mit hohem Entwicklungspotenzial und nachhaltiger Relevanz positioniert.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://smash.com/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+      <article class="dt-investP__card" role="listitem" aria-label="Revive">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/revive-logo.png" alt="Revive" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">Revive</h3>
+              <p class="dt-investP__meta">Regeneration · Longevity</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          Revive fokussiert sich auf Regeneration, Performance und ganzheitliches körperliches Wohlbefinden. Das Unternehmen verbindet moderne Gesundheitsansätze mit einem klaren Lifestyle-Fokus. Dominics Engagement basiert auf eigener Erfahrung und persönlichem Austesten der Produkte und Methoden. Besonders die Arbeit mit DNA-Analysen eröffnet neue Möglichkeiten, individuelle Leistungsfähigkeit, Regeneration und Gesundheit gezielt zu verbessern. Für ihn ist klar: Die Zukunft von Longevity und Performance wird immer stärker personalisiert sein.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://revivedna.com/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+      <article class="dt-investP__card" role="listitem" aria-label="Scoreplay">
+        <div class="dt-investP__top">
+          <div class="dt-investP__brand">
+            <div class="dt-investP__logo">
+              <img src="assets/media/scoreplay-logo.png" alt="Scoreplay" loading="lazy" decoding="async">
+            </div>
+            <div class="dt-investP__titleBlock">
+              <h3 class="dt-investP__name">Scoreplay</h3>
+              <p class="dt-investP__meta">Sport-Tech · Content · Markenführung</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="dt-investP__copy">
+          Scoreplay ist eine digitale Plattform für modernes Sport-Content-Management. Athleten, Clubs und Marken können Inhalte effizient organisieren, steuern und professionell nutzen. Dominics Investment reflektiert seine Nähe zur digitalen Weiterentwicklung des Sports und sein Verständnis für die Bedeutung von Content, Struktur und Markenführung im modernen Leistungssport.
+        </p>
+
+        <div class="dt-investP__actions">
+          <a class="dt-investP__link" href="https://www.scoreplay.io/" target="_blank" rel="noopener">Zur Website</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .dt-investP{
+    --dtp-text: rgba(255,255,255,.90);
+    --dtp-muted: rgba(255,255,255,.68);
+    --dtp-soft: rgba(255,255,255,.52);
+    --dtp-border: rgba(255,255,255,.10);
+    --dtp-radius: 22px;
+
+    min-height: 100vh;
+    padding: clamp(44px, 7vh, 110px) 0;
+    position: relative;
+    background: transparent;
+  }
+
+  .dt-investP *{
+    box-sizing: border-box;
+  }
+
+  .dt-investP__wrap{
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+  }
+
+  .dt-investP__grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  .dt-investP__card{
+    border: 1px solid var(--dtp-border);
+    border-radius: calc(var(--dtp-radius) + 6px);
+    background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    overflow: hidden;
+
+    width: min(690px, 100%);
+    margin: 0 auto;
+    max-width: none !important;
+
+    box-shadow: 0 18px 50px rgba(0,0,0,.20);
+    transition: transform .16s ease, border-color .16s ease, background .16s ease;
+
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .dt-investP__card:hover{
+    transform: translateY(-1px);
+    border-color: rgba(255,255,255,.18);
+    background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+  }
+
+  .dt-investP__top,
+  .dt-investP__copy,
+  .dt-investP__actions{
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .dt-investP__top{
+    padding-top: 22px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .dt-investP__actions{
+    padding-bottom: 22px;
+    margin-top: 2px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .dt-investP__brand{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .dt-investP__logo{
+    flex: 0 0 auto;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .dt-investP__logo img{
+    height: 34px;
+    width: auto;
+    max-width: 190px;
+    object-fit: contain;
+    object-position: left center;
+    border-radius: 0 !important;
+    opacity: .92;
+    display: block;
+  }
+
+  .dt-investP__titleBlock{
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .dt-investP__name{
+    margin: 0;
+    color: rgba(255,255,255,.92);
+    font-weight: 520;
+    font-size: 18px;
+    letter-spacing: .01em;
+  }
+
+  .dt-investP__meta{
+    margin: 0;
+    color: rgba(255,255,255,.55);
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .dt-investP__copy{
+    margin: 0;
+    padding-top: 8px;
+    color: rgba(255,255,255,.70);
+    font-size: 14px;
+    line-height: 1.75;
+    max-width: 78ch;
+  }
+
+  .dt-investP__link{
+    color: rgba(255,255,255,.88);
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 1px;
+    letter-spacing: .02em;
+    transition: opacity .18s ease;
+  font-weight: 400;
+  }
+
+  .dt-investP__link:hover{
+    opacity: .65;
+  }
+
+  @media (max-width: 920px){
+    .dt-investP__wrap{
+      width: min(1120px, calc(100% - 36px));
+    }
+
+    .dt-investP__card{
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 520px){
+    .dt-investP__wrap{
+      width: min(1120px, calc(100% - 28px));
+    }
+
+    .dt-investP__top,
+    .dt-investP__copy,
+    .dt-investP__actions{
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .dt-investP__top{
+      padding-top: 18px;
+    }
+
+    .dt-investP__actions{
+      padding-bottom: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .dt-investP__card,
+    .dt-investP__link{
+      transition: none;
+    }
+
+    .dt-investP__card:hover{
+      transform: none;
+    }
+  }
+
+.dt-investP__logo img[alt="FANtium"]{
+  max-width: 100px!important;
+}
+
+.dt-investP__logo img[alt="Revive"]{
+  max-width: 110px;
+}
+
+.dt-investP__logo img[alt="Scoreplay"]{
+  max-width: 120px;
+}
+
+.dt-investP__logo img[alt="Precision"]{
+  max-width: 120px;
+}
+
+.dt-investP__logo img[alt="Smash"]{
+  max-width: 100px;
+}
+</style>
+
+<section class="dtp-investCta" aria-label="Investment Focus">
+  <div class="dtp-investCta__wrap">
+    <div class="dtp-investCta__card">
+
+      
+      <div class="dtp-investCta__content">
+        <p class="dtp-investCta__eyebrow">Investments</p>
+        <h3 class="dtp-investCta__title">Projects with substance.</h3>
+
+        <p class="dtp-investCta__copy">
+          Dominic investiert selektiv – aus Überzeugung, eigener Erfahrung und mit einem klaren Anspruch:
+          langfristiger Mehrwert statt kurzfristiger Trend.
+          Jedes Investment wird entlang klarer Kriterien bewertet.
+        </p>
+
+        <div class="dtp-partnerCard__pillars" aria-label="Kriterien">
+          <span class="dtp-partnerCard__pill">Substanz</span>
+          <span class="dtp-partnerCard__pill">Werte</span>
+          <span class="dtp-partnerCard__pill">Long-term</span>
+          <span class="dtp-partnerCard__pill">Impact</span>
+        </div>
+
+        <div class="dtp-investCta__actions">
+          <a class="dtp-investCta__btn"
+             href="/kontakt"
+             aria-label="Investment Anfrage senden">
+            Investment Anfrage
+          </a>
+        </div>
+      </div>
+
+      
+      <div class="dtp-investCta__imageWrap" aria-hidden="true">
+        <img
+          src="assets/media/chiara-milo-bild.jpg"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== INVESTMENT CTA 50/50 ===== */
+
+.dtp-investCta{
+  padding: clamp(40px, 6vh, 96px) 0;
+}
+
+.dtp-investCta__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.dtp-investCta__card{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 26px;
+  overflow: hidden;
+
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: 0 24px 70px rgba(0,0,0,.30);
+}
+
+/* LEFT */
+.dtp-investCta__content{
+  padding: clamp(20px, 3vw, 34px);
+  display: grid;
+  align-content: center;
+  gap: 14px;
+}
+
+.dtp-investCta__eyebrow{
+  margin: 0;
+  color: rgba(255,255,255,.52);
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.dtp-investCta__title{
+  margin: 0;
+  color: rgba(255,255,255,.92);
+  font-size: clamp(22px, 2.2vw, 34px);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.dtp-investCta__copy{
+  margin: 0;
+  color: rgba(255,255,255,.68);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 48ch;
+}
+
+.dtp-investCta__actions{
+  margin-top: 8px;
+}
+
+/* reuse existing partner pills */
+.dtp-partnerCard__pillars{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dtp-partnerCard__pill{
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.22);
+  color: rgba(255,255,255,.70);
+  font-size: 12.5px;
+  line-height: 1;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+
+/* BUTTON */
+.dtp-investCta__btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  color: rgba(0,0,0,.92) !important;
+  border: 1px solid rgba(255,255,255,.12);
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform .15s ease;
+}
+
+.dtp-investCta__btn:hover{
+  transform: translateY(-1px);
+}
+
+/* RIGHT IMAGE */
+.dtp-investCta__imageWrap{
+  position: relative;
+  overflow: hidden;
+}
+
+.dtp-investCta__imageWrap img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1) contrast(1.05) brightness(.85);
+  transform: scale(1.03);
+}
+
+/* soft DT overlay */
+.dtp-investCta__imageWrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(520px 260px at 20% 20%, rgba(255,255,255,.18), rgba(255,255,255,0) 60%),
+    linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.55));
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+  .dtp-investCta__card{
+    grid-template-columns: 1fr;
+  }
+
+  .dtp-investCta__imageWrap{
+    min-height: 260px;
+  }
+}
+
+/* image left, content right on desktop */
+@media (min-width: 901px){
+  .dtp-investCta__imageWrap{ order: 1; }
+  .dtp-investCta__content{ order: 2; }
+}
+</style>
+
+<footer class="dt-footer" aria-label="Footer">
+  <div class="dt-footer__wrap">
+    <a class="dt-footer__logo" href="index.html" aria-label="Startseite">
+      <img src="assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="lazy" decoding="async" />
+    </a>
+
+    <nav class="dt-footer__links" aria-label="Footer Navigation">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+
+    <div class="dt-footer__social" aria-label="Social Media">
+      <a href="https://www.facebook.com/1.Dominic.Thiem/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.1h2.7l.4-3.2h-3.1V7.7c0-.9.2-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2v2.4H8v3.2h2.7V21h2.8z"/></svg>
+      </a>
+      <a href="https://x.com/domithiem" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3h2.9l-6.4 7.4L23 21h-6l-4.7-6.2L6.9 21H4l6.9-7.9L1.4 3h6.1l4.2 5.6L18.9 3zm-1 16.3h1.6L6.6 4.6H4.9l13 14.7z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/c/dominicthiem" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.5-.4-5.2c-.2-1-.9-1.7-1.9-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.7.5c-1 .3-1.7 1-1.9 2C1 8.5 1 12 1 12s0 3.5.4 5.2c.2 1 .9 1.7 1.9 2 1.8.5 8.7.5 8.7.5s6.9 0 8.7-.5c1-.3 1.7-1 1.9-2 .4-1.7.4-5.2.4-5.2zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/domithiem/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 2C5.7 4 4 5.7 4 7.8v8.4c0 2.1 1.7 3.8 3.8 3.8h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8c0-2.1-1.7-3.8-3.8-3.8H7.8zm8.9 1.5a1.3 1.3 0 110 2.6 1.3 1.3 0 010-2.6zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/dominic-thiem-03a46a291/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.9-2 3.9-2 4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* dt-nav-scroll-init */
+(() => {
+  const nav = document.querySelector(".dt-nav");
+  if (!nav) return;
+  const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+})();
+</script>
+
+<script src="assets/js/mobile-nav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/jpeg" href="../../../assets/media/dt-favicon.jpg" />
+  <link rel="shortcut icon" href="../../../assets/media/dt-favicon.jpg" />
+<title>THIEM VIEW - Overview</title>
+<meta name="description" content="THIEM VIEW - concise overview with link to the official website." />
+
+<style>
+:root{
+  --dt-text: rgba(255,255,255,.90);
+  --dt-muted: rgba(255,255,255,.66);
+  --dt-soft: rgba(255,255,255,.46);
+  --dt-border: rgba(255,255,255,.10);
+  --dt-bg: #171717;
+  --dt-radius: 22px;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family: var(--dt-font-primary);
+  background: var(--dt-bg);
+  color: var(--dt-text);
+}
+
+a{ color:inherit; text-decoration:none; }
+
+.dt-page{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+}
+
+.dt-page::before{
+  content:"";
+  position:absolute;
+  inset:-10%;
+  background:
+    radial-gradient(980px 520px at 14% 18%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(980px 520px at 86% 88%, rgba(255,255,255,.05), transparent 60%);
+  z-index:-1;
+}
+
+.dt-project{
+  padding: calc(clamp(44px, 7vh, 110px) + 120px) 0 clamp(44px, 7vh, 110px);
+}
+
+.dt-project__wrap{
+  width:min(1120px, calc(100% - 48px));
+  margin:0 auto;
+}
+
+.dt-project__nav{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:22px;
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--dt-soft);
+  align-items:center;
+}
+
+.dt-project__back{
+  height:44px;
+  padding:0 16px;
+  display:inline-flex;
+  align-items:center;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(0,0,0,.22);
+  transition:.2s;
+}
+
+.dt-project__back:hover{
+  background:rgba(255,255,255,.05);
+}
+
+.dt-hero{
+  position:relative;
+  isolation:isolate;
+  border:1px solid var(--dt-border);
+  border-radius:calc(var(--dt-radius) + 10px);
+  overflow:hidden;
+  margin-bottom:70px;
+}
+
+.dt-hero__visual{
+  height:min(52vh,460px);
+  background-size:cover;
+  background-position:center;
+  position:relative;
+}
+
+.dt-hero__visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.1),rgba(0,0,0,.85));
+}
+
+.dt-hero__overlay{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:grid;
+  align-content:end;
+  gap:12px;
+  padding:28px;
+}
+
+.dt-hero__logoPill{
+  display:inline-flex;
+  width:fit-content;
+  padding:10px 54px;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.32);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.dt-hero__logoPill img{
+  max-width:300px;
+  max-height:55px;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  display:block;
+}
+
+.dt-hero__title{
+  font-size:clamp(34px,3.4vw,62px);
+  margin:0;
+}
+
+.dt-hero__subtitle{
+  max-width:78ch;
+  color:var(--dt-muted);
+  line-height:1.6;
+}
+
+.dt-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:56px;
+}
+
+.dt-pillar__title{
+  font-size:clamp(24px,2.2vw,36px);
+  margin:0 0 16px 0;
+}
+
+.dt-pillar__copy p{
+  color:var(--dt-muted);
+  line-height:1.7;
+  margin-bottom:16px;
+}
+
+.dt-note{
+  margin-top:22px;
+}
+
+.dt-note__label{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--dt-soft);
+}
+
+.dt-note__value{
+  color:rgba(255,255,255,.82);
+  margin-top:6px;
+}
+
+.dt-actions{
+  margin-top:28px;
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.dt-btn{
+  height:44px;
+  padding:0 18px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+  font-size:14px;
+}
+
+.dt-btn--primary{
+  background:#fff;
+  color:#000 !important;
+}
+
+.dt-btn--ghost{
+  border:1px solid rgba(255,255,255,.18);
+}
+
+.dt-btn:hover{
+  transform:translateY(-1px);
+}
+
+.dt-panel{
+  border:1px solid var(--dt-border);
+  border-radius:var(--dt-radius);
+  padding:22px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+}
+
+.dt-panel__title{
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--dt-soft);
+  margin-bottom:14px;
+}
+
+.dt-tiles{
+  display:grid;
+  gap:14px;
+}
+
+.dt-tile{
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  padding:14px;
+}
+
+.dt-tile__label{
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--dt-soft);
+}
+
+.dt-tile__value{
+  margin-top:6px;
+  color:rgba(255,255,255,.85);
+  font-size:14px;
+}
+
+@media(max-width:920px){
+  .dt-grid{ grid-template-columns:1fr; }
+}
+
+@media(max-width:520px){
+  .dt-hero__logoPill img{
+    max-width:210px;
+    max-height:42px;
+  }
+}
+
+@media (max-width: 520px){
+  .dt-project{
+    padding-top:250px;
+  }
+}
+
+/* remove Elementor rounded corners from THIEM VIEW logo */
+.dt-hero__logoPill img{
+  border-radius:0 !important;
+  overflow:visible;
+}
+
+/* extra override for Elementor image widgets */
+.elementor img{
+  border-radius:0;
+}
+
+/* ensure the logo container itself has no rounding issues */
+.dt-hero__logoPill{
+  overflow:visible;
+}
+
+</style>
+<style>
+.dt-nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+}
+
+.dt-nav.is-scrolled{
+  background: rgba(23,23,23,.96);
+  border-bottom-color: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.dt-nav__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.dt-nav__logo{ display: inline-flex; align-items: center; }
+.dt-nav__logo img{
+  width: 86px;
+  height: auto;
+  display: block;
+  border-radius: 0 !important;
+}
+
+.dt-nav__menu{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+
+.dt-nav__menu > li{ position: relative; }
+
+.dt-nav__link,
+.dt-nav__trigger,
+.dt-nav__lang{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 8px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color .18s ease, opacity .18s ease;
+}
+
+.dt-nav__lang.is-active{
+  opacity: .45;
+  cursor: default;
+  pointer-events: none;
+  border-bottom-color: transparent !important;
+}
+
+.dt-nav__lang{ opacity: .9; }
+
+.dt-nav__link:hover,
+.dt-nav__trigger:hover,
+.dt-nav__lang:hover,
+.dt-nav__link.is-active,
+.dt-nav__trigger.is-active{
+  border-bottom-color: rgba(255,255,255,.92);
+}
+
+.dt-nav__arrow{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 7px;
+  border-right: 2px solid rgba(255,255,255,.96);
+  border-bottom: 2px solid rgba(255,255,255,.96);
+  transform: translateY(-2px) rotate(45deg);
+  opacity: .98;
+}
+
+.dt-nav__dropdown{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 272px;
+  width: max-content;
+  padding: 8px 0;
+  background: rgba(23,23,23,.98);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(0,0,0,.45);
+  display: grid;
+  gap: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+}
+
+.dt-nav__item--projects:hover .dt-nav__dropdown,
+.dt-nav__item--projects:focus-within .dt-nav__dropdown{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dt-nav__dropdown a{
+  color: rgba(255,255,255,.94);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: block;
+  white-space: nowrap;
+  font-weight: 400;
+  opacity: .92;
+  transition: background .16s ease, opacity .16s ease;
+}
+
+.dt-nav__dropdown a:hover{
+  opacity: 1;
+  background: rgba(255,255,255,.08);
+}
+
+@media (max-width: 1280px){
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+  
+}
+
+@media (max-width: 960px){
+  .dt-nav__wrap{
+    width: min(1120px, calc(100% - 28px));
+    min-height: 84px;
+    align-items: flex-start;
+    padding-top: 18px;
+    flex-direction: column;
+  }
+
+  .dt-nav__logo img{ width: 72px; }
+
+  .dt-nav__menu{
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .dt-nav__link,
+  .dt-nav__trigger,
+  .dt-nav__lang{ font-size: 16px; }
+
+  .dt-nav__dropdown{
+    position: static;
+    min-width: 0;
+    padding-top: 2px;
+    transform: none;
+    display: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dt-nav__item--projects:hover .dt-nav__dropdown,
+  .dt-nav__item--projects:focus-within .dt-nav__dropdown{
+    display: grid;
+  }
+
+  
+}
+</style>
+
+<style>
+.dt-footer{
+  margin-top: 80px;
+  border-top: 1px solid rgba(255,255,255,.08);
+  background: #171717;
+}
+
+.dt-footer__wrap{
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  min-height: 140px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.dt-footer__logo{
+  display: inline-flex;
+  align-items: center;
+}
+
+.dt-footer__logo img{
+  width: 86px !important;
+  max-width: 86px !important;
+  min-width: 86px !important;
+  height: auto !important;
+  display: block;
+  flex: 0 0 auto;
+  border-radius: 0 !important;
+}
+
+.dt-footer__links{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 64px;
+}
+
+.dt-footer__links a{
+  color: rgba(255,255,255,.88);
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: .01em;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__links a:hover,
+.dt-footer__social a:hover{
+  opacity: .7;
+}
+
+.dt-footer__social{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.dt-footer__social a{
+  width: 34px;
+  height: 34px;
+  color: #fff !important;
+  opacity: .92;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: opacity .18s ease;
+  font-weight: 400;
+}
+
+.dt-footer__social svg{
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  fill: currentColor !important;
+  opacity: 1;
+}
+
+@media (max-width: 1100px){
+  .dt-footer__wrap{
+    width: min(1120px, calc(100% - 28px));
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 26px 0;
+    gap: 20px;
+  }
+
+  .dt-footer__links{
+    gap: 28px;
+  }
+
+  .dt-footer__links a{
+    font-size: 16px;
+}
+}
+</style>
+
+<style id="dt-brand-theme">
+:root{
+  --dt-primary:#00f3ff;
+  --dt-secondary:#ffffff;
+  --dt-accent:#00f3ff;
+  --dt-font-primary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-font-secondary:-apple-system,"system-ui","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  --dt-weight-primary:400;
+  --dt-weight-secondary:400;
+  --dt-weight-text:400;
+  --dt-weight-accent:500;
+}
+html,body{ color:var(--dt-secondary); text-size-adjust:100%; -webkit-text-size-adjust:100%; }
+html{ -webkit-font-smoothing: antialiased; }
+body{ font-family: var(--dt-font-primary); font-weight:var(--dt-weight-text); }
+p{ font-family: var(--dt-font-primary); font-weight:400; }
+h1,h2,h3,h4,h5,h6{ font-weight:var(--dt-weight-primary); }
+strong,b{ font-weight:var(--dt-weight-accent); }
+.dt-accent,[data-accent="true"]{ color:var(--dt-accent); font-weight:var(--dt-weight-accent); }
+
+/* remove glow effects globally */
+.dt-page::before,
+.dt-projects::before,
+.dt-bioCV::before,
+.dt-partners::before,
+.dt-store::before,
+.dt-autograph::before,
+.dt-umbrella::before{
+  content:none !important;
+  background:none !important;
+}
+
+.dt-page,
+.dt-projects,
+.dt-bioCV,
+.dt-partners,
+.dt-store,
+.dt-autograph,
+.dt-umbrella{
+  background:transparent !important;
+}
+</style>
+
+<link rel="stylesheet" href="../../../assets/css/mobile-nav.css">
+</head>
+
+<body>
+
+<nav class="dt-nav" aria-label="Main navigation">
+  <div class="dt-nav__wrap">
+    <a class="dt-nav__logo" href="/en/" aria-label="Home">
+      <img src="../../../assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="eager" decoding="async" />
+    </a>
+
+    <ul class="dt-nav__menu">
+      <li><a class="dt-nav__link" href="/en/about/">About</a></li>
+
+      <li class="dt-nav__item--projects">
+        <a class="dt-nav__trigger is-active" href="/en/projekte/">Projects <span class="dt-nav__arrow" aria-hidden="true"></span></a>
+        <div class="dt-nav__dropdown" aria-label="Projects submenu">
+          <a href="/en/projekte/thiem-energy/">THIEM ENERGY</a>
+          <a href="/en/projekte/thiem-view/">THIEM VIEW</a>
+          <a href="/en/projekte/thiem-academy-burgenland/">THIEM ACADEMY</a>
+        </div>
+      </li>
+
+      <li><a class="dt-nav__link" href="/en/partner/">Partner</a></li>
+      <li><a class="dt-nav__link" href="/en/investments/">Investments</a></li>
+      <li><a class="dt-nav__link" href="https://shop.dominicthiem.com/" target="_blank" rel="noopener noreferrer">Shop</a></li>
+      <li><a class="dt-nav__lang" href="/projekte/thiem-view/" aria-label="Language German">DE</a></li>
+      <li><a class="dt-nav__lang is-active" href="#" aria-label="Language English" aria-current="true">EN</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="dt-page">
+<section class="dt-project">
+<div class="dt-project__wrap">
+
+<nav class="dt-project__nav">
+<a class="dt-project__back" href="/projekte">← Back to overview</a>
+<span>Project · THIEM VIEW</span>
+</nav>
+
+<header class="dt-hero">
+<div class="dt-hero__visual"
+style="background-image:url('../../../assets/media/thiem-view-hero.jpg')">
+</div>
+
+<div class="dt-hero__overlay">
+<div class="dt-hero__logoPill">
+<img src="../../../assets/media/thiem-view-logo-white.png"
+alt="THIEM VIEW">
+</div>
+
+<p class="dt-hero__subtitle">
+Lifestyle and sports sunglasses with a clear commitment to sustainability -
+designed for performance in sport and effortless style in everyday life.
+</p>
+</div>
+</header>
+
+<div class="dt-grid">
+
+<section class="dt-pillar">
+
+<h1 class="dt-pillar__title">THIEM VIEW: Rethinking style.</h1>
+
+<div class="dt-pillar__copy">
+
+<p>
+THIEM VIEW represents a new approach to lifestyle and sports sunglasses, combining performance, design, and conscious consumption.
+The products are built to perform in training while seamlessly fitting into everyday life.
+</p>
+
+<p>
+Developed in close partnership with its exclusive distribution and manufacturing partner sehen!wutscher,
+THIEM VIEW follows a clear objective: minimal in design, uncompromising in performance, and responsible in production -
+timeless, durable, and made to be worn with a good feeling.
+</p>
+
+</div>
+
+<div class="dt-note">
+<div class="dt-note__label">Mission</div>
+<div class="dt-note__value">
+Rethinking style - sustainably produced, consciously worn.
+THIEM VIEW combines design, function, and responsibility for our planet.
+</div>
+</div>
+
+<div class="dt-actions">
+<a class="dt-btn dt-btn--primary"
+href="https://wutscher.com/sonnenbrillen/marken/thiemview/"
+target="_blank" rel="noopener">
+Visit THIEM VIEW →
+</a>
+
+<a class="dt-btn dt-btn--ghost" href="/projekte">
+Back to Projects
+</a>
+</div>
+
+</section>
+
+<aside class="dt-panel">
+
+<div class="dt-panel__title">Highlights</div>
+
+<div class="dt-tiles">
+
+<div class="dt-tile">
+<div class="dt-tile__label">Mission</div>
+<div class="dt-tile__value">
+The combination of design, function, and responsibility for our planet.
+</div>
+</div>
+
+<div class="dt-tile">
+<div class="dt-tile__label">Design & Function</div>
+<div class="dt-tile__value">
+Engineered for sport - made for everyday life.
+</div>
+</div>
+
+<div class="dt-tile">
+<div class="dt-tile__label">Sustainable Approach</div>
+<div class="dt-tile__value">
+Carefully selected materials and responsible production.
+</div>
+</div>
+
+<div class="dt-tile">
+<div class="dt-tile__label">Partnership</div>
+<div class="dt-tile__value">
+Developed and executed in collaboration with sehen!wutscher.
+</div>
+</div>
+
+</div>
+
+</aside>
+
+</div>
+</div>
+</section>
+</main>
+
+<footer class="dt-footer" aria-label="Footer">
+  <div class="dt-footer__wrap">
+    <a class="dt-footer__logo" href="/en/" aria-label="Home">
+      <img src="../../../assets/media/dominic-thiem-logo.webp" alt="DT Logo" loading="lazy" decoding="async" />
+    </a>
+
+    <nav class="dt-footer__links" aria-label="Footer navigation">
+      <a href="/en/imprint/">Imprint</a>
+      <a href="/en/privacy-policy/">Privacy</a>
+      <a href="/en/contact/">Contact</a>
+    </nav>
+
+    <div class="dt-footer__social" aria-label="Social Media">
+      <a href="https://www.facebook.com/1.Dominic.Thiem/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8.1h2.7l.4-3.2h-3.1V7.7c0-.9.2-1.6 1.6-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.4 0-4 1.4-4 4.2v2.4H8v3.2h2.7V21h2.8z"/></svg>
+      </a>
+      <a href="https://x.com/domithiem" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 3h2.9l-6.4 7.4L23 21h-6l-4.7-6.2L6.9 21H4l6.9-7.9L1.4 3h6.1l4.2 5.6L18.9 3zm-1 16.3h1.6L6.6 4.6H4.9l13 14.7z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/c/dominicthiem" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.5-.4-5.2c-.2-1-.9-1.7-1.9-2C18.9 4.3 12 4.3 12 4.3s-6.9 0-8.7.5c-1 .3-1.7 1-1.9 2C1 8.5 1 12 1 12s0 3.5.4 5.2c.2 1 .9 1.7 1.9 2 1.8.5 8.7.5 8.7.5s6.9 0 8.7-.5c1-.3 1.7-1 1.9-2 .4-1.7.4-5.2.4-5.2zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/domithiem/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2zm0 2C5.7 4 4 5.7 4 7.8v8.4c0 2.1 1.7 3.8 3.8 3.8h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8c0-2.1-1.7-3.8-3.8-3.8H7.8zm8.9 1.5a1.3 1.3 0 110 2.6 1.3 1.3 0 010-2.6zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/dominic-thiem-03a46a291/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 110 5 2.5 2.5 0 010-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-1 1.9-2 3.9-2 4.1 0 4.9 2.7 4.9 6.2V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21h-4V9z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* dt-nav-scroll-init */
+(() => {
+  const nav = document.querySelector(".dt-nav");
+  if (!nav) return;
+  const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+})();
+</script>
+
+<script src="../../../assets/js/mobile-nav.js" defer></script>
+</body>
+</html>
