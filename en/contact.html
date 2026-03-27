@@ -343,7 +343,9 @@ strong,b{ font-weight:var(--dt-weight-accent); }
 .dt-staticContact input{height:56px;padding:0 16px;}
 .dt-staticContact textarea{min-height:180px;padding:14px 16px;resize:vertical;}
 .dt-staticContact button{height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.92);color:rgba(0,0,0,.92);font-size:14px;font-weight:400;cursor:pointer;width:max-content;}
- (max-width:960px){.dt-staticContact__row{grid-template-columns:1fr;}}
+.dt-staticContact button[disabled]{opacity:.65;cursor:not-allowed;}
+.dt-staticContact__status{margin:2px 0 0;color:rgba(255,255,255,.76);font-size:14px;line-height:1.5;min-height:21px;}
+@media (max-width:960px){.dt-staticContact__row{grid-template-columns:1fr;}}
 </style>
 
 <link rel="stylesheet" href="../assets/css/mobile-nav.css">
@@ -383,13 +385,14 @@ strong,b{ font-weight:var(--dt-weight-accent); }
 
       <div class="dt-contact__formWrap">
         <div class="dt-contact__formEmbed">
-          <form class="dt-staticContact" action="mailto:website.at" method="post" enctype="text/plain">
+          <form class="dt-staticContact" id="dt-contact-form" novalidate>
             <div class="dt-staticContact__row">
               <input type="text" name="name" placeholder="Name" required>
               <input type="email" name="email" placeholder="E-Mail Address" required>
             </div>
             <textarea name="message" placeholder="Your message..." required></textarea>
             <button type="submit">Send message</button>
+            <p class="dt-staticContact__status" id="dt-contact-status" aria-live="polite"></p>
           </form>
 </div>
       </div>
@@ -435,6 +438,46 @@ strong,b{ font-weight:var(--dt-weight-accent); }
   const sync = () => nav.classList.toggle("is-scrolled", window.scrollY > 8);
   sync();
   window.addEventListener("scroll", sync, { passive: true });
+})();
+</script>
+<script>
+(() => {
+  const form = document.getElementById("dt-contact-form");
+  const status = document.getElementById("dt-contact-status");
+  if (!form || !status) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const button = form.querySelector("button[type='submit']");
+    const data = new FormData(form);
+    const payload = {
+      name: String(data.get("name") || "").trim(),
+      email: String(data.get("email") || "").trim(),
+      message: String(data.get("message") || "").trim()
+    };
+
+    if (!payload.name || !payload.email || !payload.message) {
+      status.textContent = "Please fill in all fields.";
+      return;
+    }
+
+    button.disabled = true;
+    status.textContent = "Sending...";
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error("Request failed");
+      form.reset();
+      status.textContent = "Thanks! Your message was sent.";
+    } catch (err) {
+      status.textContent = "Sending failed. Please try again later.";
+    } finally {
+      button.disabled = false;
+    }
+  });
 })();
 </script>
 
